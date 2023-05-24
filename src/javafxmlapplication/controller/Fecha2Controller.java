@@ -4,6 +4,7 @@
  */
 package javafxmlapplication.view;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,6 +68,15 @@ public class Fecha2Controller implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        user = Usuario.getInstancia();
+        try {
+            club = Club.getInstance();
+        } catch (ClubDAOException ex) {
+            Logger.getLogger(Fecha2Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Fecha2Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        member = user.getUsuario();
         // TODO
         Combo.getItems().addAll("Pista 1","Pista 2", "Pista 3","Pista 4", "Pista 5", "Pista 6");
         Combo.setValue("Pista 1");
@@ -85,15 +97,22 @@ public class Fecha2Controller implements Initializable {
         
         ListView.getItems().addAll(Horas);
         a="AAAAAAAAAAAAAAAAAAAAAAAA";
-         dpBooking.setOnAction(event -> updateListView());
-        Combo.setOnAction(event -> updateListView());
+         //dpBooking.setOnAction(event -> updateListView());
+         dpBooking.valueProperty().addListener((a, b, c)->{
+             updateListView();
+         });
+         Combo.valueProperty().addListener((a, b, c)->{
+             updateListView();
+         });
+        //Combo.setOnAction(event -> updateListView());
          //ListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             // Habilitar o deshabilitar el botón de reserva según si la hora está reservada
             //boolean horaReservada = estaReservada(newValue);});
     //}  ;  
     }
     private void updateListView(){
-         String pistaSeleccionada = Combo.getValue();
+        String pistaSeleccionada = Combo.getValue();
+        System.out.println(pistaSeleccionada);
         LocalDate fechaSeleccionada =dpBooking.getValue();
 
         if (pistaSeleccionada != null &&  fechaSeleccionada!= null) {
@@ -116,6 +135,7 @@ public class Fecha2Controller implements Initializable {
                 for(Booking booking: reservadas){
                 if(hour.equals(booking.getFromTime().toString() + " - " + booking.getFromTime().plusHours(1).toString())){
                  ListView.getItems().add(a);
+                 //booking.
                     //quiero añadirlo de manera que no se pueda usar hasta que se elimine la reserva
                 }else{
                 ListView.getItems().add(hour);
@@ -139,8 +159,6 @@ public class Fecha2Controller implements Initializable {
       String pistaSeleccionada = Combo.getValue();
       LocalDate fechaSeleccionada =dpBooking.getValue();
       pista.setName(pistaSeleccionada);
-      user = Usuario.getInstancia();
-      member = user.getUsuario();
       partes = hora.split("-");
       String horaInicioReserva=partes[0].trim();
       horaInicio= LocalTime.parse(horaInicioReserva);
