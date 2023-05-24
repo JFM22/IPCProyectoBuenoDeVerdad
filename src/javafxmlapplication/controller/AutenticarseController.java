@@ -36,6 +36,7 @@ import utils.Usuario;
  *
  * @author anónimo
  */
+
 public class AutenticarseController implements Initializable {
 
     @FXML
@@ -55,7 +56,7 @@ public class AutenticarseController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    //LO QUE SEA
+    //LO QUE SEA 33
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         LinearGradient gradient = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
