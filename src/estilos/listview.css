@@ -1,0 +1,14 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 23 may 2023, 16:12:43
+    Author     : Cristian
+*/
+.list-view{
+    -fx-selection-bar: red;
+}
+.list-view{
+    -fx-background-color: green;
+} 
