@@ -82,23 +82,24 @@ public class Fecha2Controller implements Initializable {
         // TODO
         Combo.getItems().addAll("Pista 1","Pista 2", "Pista 3","Pista 4", "Pista 5", "Pista 6");
         Combo.setValue("Pista 1");
+        pista.setName(Combo.getValue());
         dpBooking.setDayCellFactory((DatePicker picker)->{
-        return new DateCell() {
-        @Override
-        public void updateItem(LocalDate date, boolean empty) {
-        super.updateItem(date, empty);
-        LocalDate today = LocalDate.now();
-        
-        setDisable(empty || date.compareTo(today) < 0 );
-        }
-       };
-    });
+            return new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0 );
+            }
+           };
+        });
        
         
         dpBooking.setValue(LocalDate.now());
-        
-        ListView.getItems().addAll(Horas);
-        a="AAAAAAAAAAAAAAAAAAAAAAAA";
+        updateListView();
+        //ListView.getItems().addAll(Horas);
+        //a="AAAAAAAAAAAAAAAAAAAAAAAA";
          //dpBooking.setOnAction(event -> updateListView());
          dpBooking.valueProperty().addListener((a, b, c)->{
              updateListView();
@@ -114,7 +115,7 @@ public class Fecha2Controller implements Initializable {
     }
     private void updateListView(){
         String pistaSeleccionada = Combo.getValue();
-        System.out.println(pistaSeleccionada);
+        System.out.println(Combo.getValue());
         LocalDate fechaSeleccionada =dpBooking.getValue();
 
         if (pistaSeleccionada != null &&  fechaSeleccionada!= null) {
@@ -136,7 +137,7 @@ public class Fecha2Controller implements Initializable {
                 a = hour;
                 for(Booking booking : reservadas){
                     System.out.println(booking.getFromTime().toString());
-                    if(hour.equals(booking.getFromTime().toString() + " - " + booking.getFromTime().plusHours(1).toString())){
+                    if(hour.equals(booking.getFromTime().toString() + "-" + booking.getFromTime().plusHours(1).toString())){
                       a+="(reservada)";
                  //booking.
                     //quiero añadirlo de manera que no se pueda usar hasta que se elimine la reserva
@@ -160,11 +161,11 @@ public class Fecha2Controller implements Initializable {
       String hora=ListView.getSelectionModel().getSelectedItem();
       String pistaSeleccionada = Combo.getValue();
       LocalDate fechaSeleccionada =dpBooking.getValue();
-      pista.setName(pistaSeleccionada);
       partes = hora.split("-");
       String horaInicioReserva=partes[0].trim();
       horaInicio= LocalTime.parse(horaInicioReserva);
       club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,paid,pista,member);
+      updateListView();
       //ListView.getItems().remove(hora); no va
     }
 }
