@@ -1,7 +1,6 @@
 nbproject/private
 nbproject/project.properties
-build
-lib
+build/
+lib/
 club.db
 /dist/
-nbproject/project.properties
