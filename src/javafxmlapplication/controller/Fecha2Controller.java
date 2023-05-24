@@ -51,7 +51,7 @@ public class Fecha2Controller implements Initializable {
     Booking reserva;
     Member member;
     Usuario user;
-    Court pista;
+    Court pista = new Court();
     LocalDateTime fechaHoy;
     LocalTime horaInicio;
     boolean paid=false;
@@ -76,6 +76,8 @@ public class Fecha2Controller implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(Fecha2Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Member u = club.getMemberByCredentials("jformar", "1111111");
+        user.setUsuario(u);
         member = user.getUsuario();
         // TODO
         Combo.getItems().addAll("Pista 1","Pista 2", "Pista 3","Pista 4", "Pista 5", "Pista 6");
@@ -118,7 +120,7 @@ public class Fecha2Controller implements Initializable {
         if (pistaSeleccionada != null &&  fechaSeleccionada!= null) {
             // Obtener las horas reservadas para la pista y fecha seleccionadas
             List<Booking> reservadas=club.getCourtBookings(pistaSeleccionada, fechaSeleccionada);
-            
+
             // Llama a tu método existente o consulta la base de datos aquí para obtener las horas reservadas
             // Por ejemplo, puedes tener un método "getReservedHours" en tu clase Club
             // que reciba el número de pista y la fecha y devuelva las horas reservadas.
@@ -127,25 +129,25 @@ public class Fecha2Controller implements Initializable {
 
             // Limpiar la lista actual
             ListView.getItems().clear();
-
             // Agregar todas las horas disponibles a la lista
             for (String hour : Horas) {
                 // Verificar si la hora está reservada
                 // Agregar la hora a la lista y establecer el estilo si está reservada
-                for(Booking booking: reservadas){
-                if(hour.equals(booking.getFromTime().toString() + " - " + booking.getFromTime().plusHours(1).toString())){
-                 ListView.getItems().add(a);
+                a = hour;
+                for(Booking booking : reservadas){
+                    System.out.println(booking.getFromTime().toString());
+                    if(hour.equals(booking.getFromTime().toString() + " - " + booking.getFromTime().plusHours(1).toString())){
+                      a+="(reservada)";
                  //booking.
                     //quiero añadirlo de manera que no se pueda usar hasta que se elimine la reserva
-                }else{
-                ListView.getItems().add(hour);
-                }
+                     }
                     
                 //if(booking)){
                    
                // }
                 
                 }
+                ListView.getItems().add(a);
                 
             }
         }
