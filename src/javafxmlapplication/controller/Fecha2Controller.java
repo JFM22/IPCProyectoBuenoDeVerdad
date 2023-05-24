@@ -6,6 +6,7 @@ package javafxmlapplication.view;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import model.Booking;
 import model.Club;
+import model.ClubDAOException;
+import model.Court;
+import model.Member;
+import utils.Usuario;
 
 /**
  * FXML Controller class
@@ -40,6 +45,15 @@ public class Fecha2Controller implements Initializable {
     String[] Horas = {"9:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00"
     ,"16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00","20:00-21:00","21:00-22:00"};
     String horario;
+    Booking reserva;
+    Member member;
+    Usuario user;
+    Court pista;
+    LocalDateTime fechaHoy;
+    LocalTime horaInicio;
+    boolean paid=false;
+    String[] partes;
+    String a;
     @FXML
     private Button ReservarButton;
     
@@ -60,6 +74,7 @@ public class Fecha2Controller implements Initializable {
         public void updateItem(LocalDate date, boolean empty) {
         super.updateItem(date, empty);
         LocalDate today = LocalDate.now();
+        
         setDisable(empty || date.compareTo(today) < 0 );
         }
        };
@@ -69,7 +84,7 @@ public class Fecha2Controller implements Initializable {
         dpBooking.setValue(LocalDate.now());
         
         ListView.getItems().addAll(Horas);
-        
+        a="AAAAAAAAAAAAAAAAAAAAAAAA";
          dpBooking.setOnAction(event -> updateListView());
         Combo.setOnAction(event -> updateListView());
          //ListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -100,7 +115,8 @@ public class Fecha2Controller implements Initializable {
                 // Agregar la hora a la lista y establecer el estilo si está reservada
                 for(Booking booking: reservadas){
                 if(hour.equals(booking.getFromTime().toString() + " - " + booking.getFromTime().plusHours(1).toString())){
-                    
+                 ListView.getItems().add(a);
+                    //quiero añadirlo de manera que no se pueda usar hasta que se elimine la reserva
                 }else{
                 ListView.getItems().add(hour);
                 }
@@ -118,6 +134,17 @@ public class Fecha2Controller implements Initializable {
         
     
     @FXML
-    private void ReservarClicked(ActionEvent event) {
+    private void ReservarClicked(ActionEvent event) throws ClubDAOException {
+      String hora=ListView.getSelectionModel().getSelectedItem();
+      String pistaSeleccionada = Combo.getValue();
+      LocalDate fechaSeleccionada =dpBooking.getValue();
+      pista.setName(pistaSeleccionada);
+      user = Usuario.getInstancia();
+      member = user.getUsuario();
+      partes = hora.split("-");
+      String horaInicioReserva=partes[0].trim();
+      horaInicio= LocalTime.parse(horaInicioReserva);
+      club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,paid,pista,member);
+      //ListView.getItems().remove(hora); no va
     }
 }
