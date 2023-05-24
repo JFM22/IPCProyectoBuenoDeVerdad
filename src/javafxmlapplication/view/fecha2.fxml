@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.view.Fecha2Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="596.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.view.Fecha2Controller">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -65,7 +65,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </opaqueInsets>
                <children>
-                  <ListView fx:id="ListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="254.0" prefWidth="659.0" VBox.vgrow="ALWAYS">
+                  <ListView fx:id="ListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="254.0" prefWidth="659.0" stylesheets="@../../estilos/listview.css" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>

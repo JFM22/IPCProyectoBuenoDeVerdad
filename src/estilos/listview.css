@@ -6,9 +6,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Created on : 23 may 2023, 16:12:43
     Author     : Cristian
 */
-.list-view{
-    -fx-selection-bar: red;
+.listview li:selected{
+    background-color: yellow;
+    color: orange;
 }
-.list-view{
-    -fx-background-color: green;
+.listview{
+    -fx-background-color: cyan;
+    
 } 

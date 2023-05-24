@@ -98,8 +98,11 @@ public class MenuPrincipalController implements Initializable {
     }
     
     @FXML
-    private void reservarAction(ActionEvent event) {
+    private void reservarAction(ActionEvent event) throws IOException {
         change_color(hBox_Reservar);
+        FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/fecha2.fxml"));
+        Node root = loader.load();
+        borderpane.setCenter(root);
     }
 
     @FXML
