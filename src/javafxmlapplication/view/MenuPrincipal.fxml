@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../../estilos/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.view.MenuPrincipalController">
+   <left>
+      <VBox fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="161.0" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <Separator prefWidth="200.0" />
+            <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="161.0" spacing="1.0">
+               <children>
+                  <HBox fx:id="hBox_Reservar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button fx:id="reservar_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#reservarAction" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: #FFD700;" text="Reservar Pista" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <HBox fx:id="hBox_misReservas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button fx:id="misReservas_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#misReservasAction" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: #1E90FF;" text="Mis reservas">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <HBox fx:id="hBox_miPerfil" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button fx:id="miPerfil_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#miPerfilAction" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: #F0F0F0;" text="Mi perfil">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </VBox>
+            <Separator prefWidth="200.0" />
+            <VBox alignment="BOTTOM_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="161.0" spacing="20.0" style="-fx-background-color: #0b2e8e;" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label fx:id="NotLoggedLabel" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="156.0" text="Ha entrado como Invitado, alguna de las opciones solo están disponibles para usuarios registrados." textAlignment="CENTER" textFill="RED" underline="true" wrapText="true" />
+                  <Button mnemonicParsing="false" onAction="#volver" prefHeight="34.0" prefWidth="130.0" stylesheets="@../../estilos/styles.css" text="Volver">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="50.0" />
+               </padding></VBox>
+         </children>
+      </VBox>
+   </left>
+   <top>
+      <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: #051540;" BorderPane.alignment="TOP_RIGHT">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefWidth="161.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="67.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/logo.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Text fx:id="nickNameLabel" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="Arial Bold" size="22.0" />
+                     </font>
+                  </Text>
+                  <Circle fx:id="userImage" fill="DODGERBLUE" radius="42.0" stroke="BLACK" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Circle>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.2, 0, 0);" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+      </BorderPane>
+   </center>
+</BorderPane>
