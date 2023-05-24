@@ -55,7 +55,7 @@ public class AutenticarseController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
+    //LO QUE SEA
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         LinearGradient gradient = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
