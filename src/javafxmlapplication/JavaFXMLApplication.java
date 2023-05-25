@@ -33,7 +33,7 @@ public class JavaFXMLApplication extends Application {
     public void start(Stage stage) throws Exception {
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader= new  FXMLLoader(getClass().getResource("view/fecha2.fxml"));
+        FXMLLoader loader= new  FXMLLoader(getClass().getResource("view/misReservas.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         roots.put("inicioapp", root);
