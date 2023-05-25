@@ -25,6 +25,7 @@ import model.Booking;
 import model.Court;
 import model.Member;
 import utils.Usuario;
+import java.time.LocalDateTime;
 /**
  * FXML Controller class
  *
@@ -52,6 +53,12 @@ public class MisReservasController implements Initializable {
     private Button eliminar;
 
     private boolean estaPagada = false;
+    
+    private LocalDateTime diaReserva;
+    
+    private LocalDate diaReservado;
+    
+    private LocalDate HoraReserva;
 
     Member miembro;
     
@@ -106,6 +113,10 @@ public class MisReservasController implements Initializable {
     @FXML
     private void cancelarReserva(ActionEvent event) {
             Booking selectedItem = tableview.getSelectionModel().getSelectedItem();
+            diaReserva = selectedItem.getBookingDate();
+            diaReservado = selectedItem.getMadeForDay();
+            HoraReserva = diaReserva.toLocalDate();
+            int DifH = diaReservado.compareTo(HoraReserva);
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Cancelar Reserva");
             alert.setHeaderText("Quieres cancelar esta reserva");
@@ -116,12 +127,19 @@ public class MisReservasController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()){
                 if(result.get() == buttonTypeTwo){
+                  if(DifH > 1) {  
                     tableview.getItems().remove(selectedItem);
                     Alert alert2 = new Alert(AlertType.INFORMATION);
                     alert2.setTitle("Cancelar Reserva");
                     alert2.setHeaderText(null);
                     alert2.setContentText("La reserva se ha cancelado correctamente");
                     alert2.showAndWait();
+                  } else {
+                    Alert alert4 = new Alert(AlertType.WARNING);
+                    alert4.setTitle("Advertencia");
+                    alert4.setHeaderText(null);
+                    alert4.setContentText("No se puede cancelar la reserva ya que quedan menos de 24 horas para su uso");
+                  }
                 }
                 if(result.get() == buttonTypeOne){
                     System.out.println("Cancelado");
