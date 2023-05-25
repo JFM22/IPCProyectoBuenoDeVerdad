@@ -104,11 +104,6 @@
                               <Font size="19.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="field_telefono" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="93.0" promptText="+34" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </TextField>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname:" GridPane.rowIndex="3">
                            <font>
                               <Font size="19.0" />
@@ -129,6 +124,20 @@
                               <Font size="15.0" />
                            </font>
                         </PasswordField>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <Text fill="GREY" strokeType="OUTSIDE" strokeWidth="0.0" text="+34">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="field_telefono" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="93.0" promptText="654270568">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
                      </children>
                      <VBox.margin>
                         <Insets left="10.0" />
@@ -145,16 +154,6 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nº Tarjeta de crédito*">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CVV*" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Text>
                         <TextField fx:id="field_tarjeta" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="166.0" promptText="XXXXXXXXXXXXXXXX" GridPane.rowIndex="1">
                            <font>
                               <Font size="15.0" />
@@ -165,14 +164,6 @@
                               <Font size="15.0" />
                            </font>
                         </TextField>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Imagen de perfil*:" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets top="10.0" />
-                           </GridPane.margin>
-                        </Text>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
                               <Button fx:id="button_imagen" mnemonicParsing="false" onAction="#escoger_imagen" prefHeight="26.0" prefWidth="123.0" text="Escoger imagen" />
@@ -193,6 +184,48 @@
                            <padding>
                               <Insets top="10.0" />
                            </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nº Tarjeta de crédito">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nº SVC">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="BOTTOM_LEFT" GridPane.rowIndex="2">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Imagen de perfil:">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                           </children>
                         </HBox>
                      </children>
                      <VBox.margin>
