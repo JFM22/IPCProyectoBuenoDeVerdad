@@ -107,6 +107,56 @@ public class MisDatosController implements Initializable {
         mod_apellidos.visibleProperty().bind(Bindings.notEqual(u.getSurnameProperty(), field_apellidos.textProperty()));
         mod_telefono.visibleProperty().bind(Bindings.notEqual(u.getTelephoneProperty(), field_telefono.textProperty()));
         mod_contraseña.visibleProperty().bind(field_password.textProperty().isNotEmpty());
+        field_tarjeta.textProperty().addListener((a,oldV,newV)->{
+            if(!newV.equals("") && !newV.matches("\\d+")){
+                launch_error_inm("El número de la tarjeta está formado solo por números");
+                field_tarjeta.setText(oldV);
+            }
+            else if(newV.length() > 16){
+                launch_error_inm("El número de la tarjeta debe contener 16 dígitos");
+                field_tarjeta.setText(oldV);
+            }
+        });
+        field_cvv.textProperty().addListener((a,oldV,newV)->{
+            if(!newV.equals("") && !newV.matches("\\d+")){
+                launch_error_inm("El número vsc formado solo por números");
+                field_cvv.setText(oldV);
+            }
+            else if(newV.length() > 3){
+                launch_error_inm("El número del svc debe contener 3 dígitos");
+                field_cvv.setText(oldV);
+            }
+        });
+        field_nickname.textProperty().addListener((a,oldV,newV)->{
+            if(newV.contains(" ")){
+                launch_error_inm("El nickname no puede contener espacios");
+                field_nickname.setText(oldV);
+            }
+        });
+        field_telefono.textProperty().addListener((a,oldV,newV)->{
+            if(!newV.equals("") && !newV.matches("\\d+")){
+                launch_error_inm("El número de teléfono está formado solo por números");
+                field_telefono.setText(oldV);
+            }
+            else if(newV.length() > 9){
+                launch_error_inm("El numero de telefono está formado por 9 dígitos");
+                field_telefono.setText(oldV);
+            }
+        });
+        field_password.focusedProperty().addListener((observable, oldValue, newValue)->{
+            if (!newValue){
+                if(field_password.getText().length()<7 && !field_password.getText().equals("")){
+                    launch_error_inm("La contraseña debe contener más de 6 carácteres");
+                    field_password.requestFocus();
+                };
+            }
+        });
+    }    
+    private void launch_error_inm(String s){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error en formato");
+                alert.setHeaderText(s);
+                alert.showAndWait();
     }    
     public void inicializar(){
         im = member.getImage();
@@ -192,7 +242,7 @@ public class MisDatosController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Datos válidos");
             alert.setHeaderText("Al aceptar este mensaje tus datos serán modificados."
-                    + "\n¿Quieres continuar?.");
+                    + "\n¿Quieres continuar?");
             //alert.setContentText();
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK){

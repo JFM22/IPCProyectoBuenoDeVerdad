@@ -91,8 +91,58 @@ public class RegistroController implements Initializable {
                 new Stop(0, Color.web("#0a2d8f")),
                 new Stop(1, Color.web("#051540")));
         main.setBackground(new Background(new BackgroundFill(gradient, null, null)));
+        
+        field_tarjeta.textProperty().addListener((a,oldV,newV)->{
+            if(!newV.equals("") && !newV.matches("\\d+")){
+                launch_error_inm("El número de la tarjeta está formado solo por números");
+                field_tarjeta.setText(oldV);
+            }
+            else if(newV.length() > 16){
+                launch_error_inm("El número de la tarjeta debe contener 16 dígitos");
+                field_tarjeta.setText(oldV);
+            }
+        });
+        field_cvv.textProperty().addListener((a,oldV,newV)->{
+            if(!newV.equals("") && !newV.matches("\\d+")){
+                launch_error_inm("El número vsc formado solo por números");
+                field_cvv.setText(oldV);
+            }
+            else if(newV.length() > 3){
+                launch_error_inm("El número del svc debe contener 3 dígitos");
+                field_cvv.setText(oldV);
+            }
+        });
+        field_nickname.textProperty().addListener((a,oldV,newV)->{
+            if(newV.contains(" ")){
+                launch_error_inm("El nickname no puede contener espacios");
+                field_nickname.setText(oldV);
+            }
+        });
+        field_telefono.textProperty().addListener((a,oldV,newV)->{
+            if(!newV.equals("") && !newV.matches("\\d+")){
+                launch_error_inm("El número de teléfono está formado solo por números");
+                field_telefono.setText(oldV);
+            }
+            else if(newV.length() > 9){
+                launch_error_inm("El numero de telefono está formado por 9 dígitos");
+                field_telefono.setText(oldV);
+            }
+        });
+        field_password.focusedProperty().addListener((observable, oldValue, newValue)->{
+            if (!newValue){
+                if(field_password.getText().length()<7){
+                    launch_error_inm("La contraseña debe contener más de 6 carácteres");
+                    field_password.requestFocus();
+                };
+            }
+        });
     }    
-    
+    private void launch_error_inm(String s){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error en formato");
+                alert.setHeaderText(s);
+                alert.showAndWait();
+    }
     private void launch_error(ArrayList<String> ar){
         String errores = "";
         for(String s : ar) errores += s+"\n";
