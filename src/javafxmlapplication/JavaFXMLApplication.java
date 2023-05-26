@@ -33,7 +33,7 @@ public class JavaFXMLApplication extends Application {
     public void start(Stage stage) throws Exception {
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader= new  FXMLLoader(getClass().getResource("view/misReservas.fxml"));
+        FXMLLoader loader= new  FXMLLoader(getClass().getResource("view/inicioapp.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         roots.put("inicioapp", root);
@@ -57,7 +57,7 @@ public class JavaFXMLApplication extends Application {
         // 3- asiganación de la escena al Stage que recibe el metodo 
         //     - configuracion del stage
         //     - se muestra el stage de manera no modal mediante el metodo show()
-        
+        scene.getStylesheets().add(getClass().getResource("/estilos/styles_1.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("start PROJECT - IPC:");
         Usuario.getInstancia();

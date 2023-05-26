@@ -4,6 +4,7 @@
  */
 package javafxmlapplication.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import javafx.util.Duration;
@@ -14,11 +15,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Text;
@@ -50,12 +53,13 @@ public class InicioappController implements Initializable {
         //        new javafx.scene.paint.Stop(1, Color.TRANSPARENT)));
         //main.getChildren().add(rect);
         UserTexto.textProperty().bind(Usuario.getInstancia().getNickProperty());
-        LinearGradient gradient = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
-                new Stop(0, Color.web("#0a2d8f")),
-                new Stop(1, Color.web("#051540")));
-        
-        // Establecer el fondo del panel con el gradiente
-        main.setBackground(new Background(new BackgroundFill(gradient, null, null)));
+//        LinearGradient gradient = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
+//                new Stop(0, Color.web("#0a2d8f")),
+//                new Stop(1, Color.web("#051540")));
+//        
+//        // Establecer el fondo del panel con el gradiente
+//        main.setBackground(new Background(new BackgroundFill(gradient, null, null)));
+          
     }    
 
     @FXML

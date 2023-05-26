@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="main" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.InicioappController">
+<VBox id="main" fx:id="main" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.InicioappController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fitHeight="187.0" fitWidth="233.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="213.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../icons/logo.png" />
                </image>
@@ -23,18 +23,18 @@
             </ImageView>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GreenBall">
                <font>
-                  <Font size="28.0" />
+                  <Font name="System Bold" size="34.0" />
                </font>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Text>
-            <Text fill="#96e9e9" strokeType="OUTSIDE" strokeWidth="0.0" text="La manera más fácil de reservar una pista de tenis">
+            <Text fill="#00ffaf" strokeType="OUTSIDE" strokeWidth="0.0" text="La manera más fácil de reservar una pista de tenis">
                <VBox.margin>
                   <Insets bottom="50.0" />
                </VBox.margin>
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Italic" size="14.0" />
                </font>
             </Text>
             <HBox alignment="CENTER" prefWidth="200.0" spacing="50.0">
@@ -102,7 +102,7 @@
       </VBox>
       <HBox alignment="BOTTOM_LEFT" fillHeight="false">
          <children>
-            <Text fill="#157dc3" strokeType="OUTSIDE" strokeWidth="0.0" text="IPC © Grupo 2C1, Javier Fortuño, Christian Vinader, Isaac Cruz">
+            <Text fill="#c1e6ff" strokeType="OUTSIDE" strokeWidth="0.0" text="IPC © Grupo 2C1, Javier Fortuño, Christian Vinader, Isaac Cruz">
                <HBox.margin>
                   <Insets left="2.0" />
                </HBox.margin>

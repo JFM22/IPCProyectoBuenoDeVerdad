@@ -6,3 +6,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Created on : 15 may 2023, 14:00:30
     Author     : Javier
 */
+.button{
+    -fx-background-image: url("logo.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 900 506;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0.5, 0, 0); 
+}
+#main{
+    -fx-background-image: url("fondob.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}

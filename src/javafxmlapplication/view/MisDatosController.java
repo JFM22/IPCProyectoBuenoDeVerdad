@@ -259,7 +259,7 @@ public class MisDatosController implements Initializable {
                 alert.setTitle("Datos modificados");
                 alert.setHeaderText("Tus datos han sido modificados correctamente");
                 alert.showAndWait();
-            } else {}
+            } else {inicializar();}
         }
     }
     private void launch_error(ArrayList<String> ar){

@@ -19,40 +19,6 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../estilos/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.RegistroController">
-   <right>
-      <VBox alignment="CENTER" prefHeight="544.0" prefWidth="271.0" spacing="10.0" style="-fx-background-color: #051540;">
-         <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <ImageView fitHeight="171.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
-                     <image>
-                        <Image url="@../../icons/logo.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="50.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <Text fill="#00a1ff" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Te arrepientes de lo que has hecho?" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="30.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Button mnemonicParsing="false" onAction="#volver" prefHeight="34.0" prefWidth="130.0" text="Volver" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-   </right>
    <center>
       <HBox fx:id="main" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="544.0" prefWidth="602.0" BorderPane.alignment="CENTER">
          <children>
@@ -249,4 +215,38 @@
          </children>
       </HBox>
    </center>
+   <left>
+      <VBox alignment="CENTER" prefHeight="544.0" prefWidth="271.0" spacing="10.0" style="-fx-background-color: #051540;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="171.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+                     <image>
+                        <Image url="@../../icons/logo.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="50.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Text fill="#00a1ff" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Te arrepientes de lo que has hecho?" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Button mnemonicParsing="false" onAction="#volver" prefHeight="34.0" prefWidth="130.0" text="Volver" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
 </BorderPane>
