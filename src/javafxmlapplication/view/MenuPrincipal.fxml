@@ -20,9 +20,22 @@
             <Separator prefWidth="200.0" />
             <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="161.0" spacing="1.0">
                <children>
+                  <HBox fx:id="hBox_DisponibilidadPistas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#verDisponibilidadAction">
+                     <children>
+                        <Button fx:id="reservar_button1" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#reservarAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #FFD700;" text="Disponibilidad de las pistas" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
                   <HBox fx:id="hBox_Reservar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button fx:id="reservar_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#reservarAction" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: #FFD700;" text="Reservar Pista" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="reservar_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#reservarAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #FFD700;" text="Reservar Pista" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="17.0" />
                            </font></Button>
@@ -37,7 +50,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox fx:id="hBox_misReservas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button fx:id="misReservas_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#misReservasAction" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: #1E90FF;" text="Mis reservas">
+                        <Button fx:id="misReservas_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#misReservasAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #1E90FF;" text="Mis reservas">
                            <font>
                               <Font size="17.0" />
                            </font></Button>
@@ -49,7 +62,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox fx:id="hBox_miPerfil" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button fx:id="miPerfil_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#miPerfilAction" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: #F0F0F0;" text="Mi perfil">
+                        <Button fx:id="miPerfil_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#miPerfilAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #F0F0F0;" text="Mi perfil">
                            <font>
                               <Font size="17.0" />
                            </font></Button>
