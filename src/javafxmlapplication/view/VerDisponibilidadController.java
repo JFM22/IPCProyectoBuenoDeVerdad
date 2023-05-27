@@ -62,6 +62,8 @@ public class VerDisponibilidadController implements Initializable {
     private TableColumn<reserva, String> hora;
     @FXML
     private TableColumn<reserva, String> member;
+    @FXML
+    private TableColumn<reserva, String> disponibilidad;
     
     private ObservableList<reserva> Reservas = FXCollections.observableList(new ArrayList<reserva>());
     private final LocalTime firstSlotStart = LocalTime.of(9, 0);
@@ -157,6 +159,7 @@ public class VerDisponibilidadController implements Initializable {
         pista.setCellValueFactory(new PropertyValueFactory<reserva, String>("pista"));
         hora.setCellValueFactory(new PropertyValueFactory<reserva, String>("hora"));
         member.setCellValueFactory(new PropertyValueFactory<reserva, String>("miembro"));
+        disponibilidad.setCellValueFactory(new PropertyValueFactory<reserva, String>("disponibilidad"));
     }    
 
     @FXML
