@@ -150,6 +150,19 @@
                   <Label text="19:00 - 20:00" GridPane.rowIndex="11" />
                   <Label text="20:00 - 21:00" GridPane.rowIndex="12" />
                   <Label text="21:00 - 22:00" GridPane.rowIndex="13" />
+                  <Label fx:id="label1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="label2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada2" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="label3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="label4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="label5" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="label6" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="label7" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label fx:id="label8" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <Label fx:id="label9" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <Label fx:id="label10" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <Label fx:id="label11" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <Label fx:id="label12" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                  <Label fx:id="label13" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Reservada" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                </children>
             </GridPane>
             <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
