@@ -79,7 +79,7 @@
             <Separator prefWidth="200.0" />
             <VBox alignment="BOTTOM_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="161.0" spacing="20.0" style="-fx-background-color: #0b2e8e;" VBox.vgrow="ALWAYS">
                <children>
-                  <Label fx:id="NotLoggedLabel" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="156.0" text="Ha entrado como Invitado, alguna de las opciones solo están disponibles para usuarios registrados." textAlignment="CENTER" textFill="RED" underline="true" wrapText="true" />
+                  <Label fx:id="NotLoggedLabel" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="156.0" text="Algunas de las opciones solo están disponibles para usuarios registrados." textAlignment="CENTER" textFill="RED" underline="true" wrapText="true" />
                   <Button mnemonicParsing="false" onAction="#volver" prefHeight="34.0" prefWidth="130.0" stylesheets="@../../estilos/styles.css" text="Volver">
                      <font>
                         <Font size="15.0" />
