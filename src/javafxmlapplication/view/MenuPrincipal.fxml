@@ -22,7 +22,7 @@
                <children>
                   <HBox fx:id="hBox_DisponibilidadPistas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#verDisponibilidadAction">
                      <children>
-                        <Button fx:id="reservar_button1" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#reservarAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #FFD700;" text="Disponibilidad de las pistas" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="disp_Button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#verDisponibilidadAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #FFD700;" text="Disponibilidad de las pistas" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="17.0" />
                            </font>

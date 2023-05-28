@@ -14,32 +14,27 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
 import model.Booking;
 import model.Club;
 import model.ClubDAOException;
 import model.Court;
-import model.Member;
 
 /**
  * FXML Controller class
@@ -48,8 +43,6 @@ import model.Member;
  */
 public class VerDisponibilidadController implements Initializable {
 
-    @FXML
-    private ChoiceBox<?> pistas;
     @FXML
     private TextField buscadorNickname;
     @FXML
@@ -65,13 +58,17 @@ public class VerDisponibilidadController implements Initializable {
     @FXML
     private TableColumn<reserva, String> disponibilidad;
     
+    private List<String> pistas = new ArrayList<>();
+    
     private ObservableList<reserva> Reservas = FXCollections.observableList(new ArrayList<reserva>());
     private final LocalTime firstSlotStart = LocalTime.of(9, 0);
     private final Duration slotLength = Duration.ofMinutes(60);
     private final LocalTime lastSlotStart = LocalTime.of(21, 0);
-    private List<TimeSlot> timeSlots = new ArrayList<>(); //Para varias columnas List<List<TimeSolt>>
+    private List<TimeSlot> timeSlots; //Para varias columnas List<List<TimeSolt>>
     
     Club club;
+    @FXML
+    private ComboBox<String> combo;
     /**
      * Initializes the controller class.
      */
@@ -84,38 +81,52 @@ public class VerDisponibilidadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(VerDisponibilidadController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        combo.getItems().add("TODAS");
+        for(Court c : club.getCourts()){pistas.add(c.getName());}
+        combo.getItems().addAll(pistas);
+        combo.setValue("TODAS");
+        
+        buscadorNickname.textProperty().addListener((a,oldV,newV)->{
+            if(newV.contains(" ")){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error en formato");
+                alert.setHeaderText("El nickname no puede contener espacios");
+                alert.showAndWait();
+                buscadorNickname.setText(oldV);
+            }
+        });
         //Club club= Club.getInstance(); 
         //==================================
         //Clean the file club.db
-        club.setInitialData();
+        //club.setInitialData();
         
         //===================================
         // club data:
-        System.out.println("Club name: "+ club.getName());
-        for (Court court : club.getCourts()) {
-            System.out.println("court:" + court.getName());
-        }
+//        System.out.println("Club name: "+ club.getName());
+//        for (Court court : club.getCourts()) {
+//            System.out.println("court:" + court.getName());
+//        }
         //===================================
         // add simple data:
-        club.addSimpleData();
+        //club.addSimpleData();
         
         //===================================
         // users        
-        for (Member member : club.getMembers()) {
-            System.out.println("member:" + member.getName()+ ", "+ member.getNickName());
-        }
+//        for (Member member : club.getMembers()) {
+//            System.out.println("member:" + member.getName()+ ", "+ member.getNickName());
+//        }
         
         //===================================
         // bookings now + 2 days
-        System.out.println("Bookings after 2 days");
-        List<Booking> forDayBookings = club.getForDayBookings(LocalDate.now().plusDays(2));
-        for (Booking booking : forDayBookings) {
-              System.out.println("booking:" + booking.getMember().getNickName()+
-                      ", " + booking.getCourt().getName()+ ", "+
-                      booking.getMadeForDay().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) +
-                      ", "+booking.getFromTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
-        }  
-        
+//        System.out.println("Bookings after 2 days");
+//        List<Booking> forDayBookings = club.getForDayBookings(LocalDate.now().plusDays(0));
+//        for (Booking booking : forDayBookings) {
+//              System.out.println("booking:" + booking.getMember().getNickName()+
+//                      ", " + booking.getCourt().getName()+ ", "+
+//                      booking.getMadeForDay().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) +
+//                      ", "+booking.getFromTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
+//        }  
+//        
         timeSlots = new ArrayList<>();
         //club.addSimpleData();
         //----------------------------------------------------------------------------------
@@ -130,40 +141,61 @@ public class VerDisponibilidadController implements Initializable {
             // creamos el SlotTime, lo anyadimos a la lista de la columna y asignamos sus manejadores
             TimeSlot timeSlot = new TimeSlot(startTime, slotLength);
             timeSlots.add(timeSlot);
-            //registerHandlers(timeSlot);
-            //-----------------------------------------------------------
-            // lo anyadimos al grid en la posicion x= 1, y= slotIndex
-            //grid.add(timeSlot.getView(), 1, slotIndex);
-            //slotIndex++;
+            
         }
-        List<Booking> bo = club.getCourtBookings(club.getCourts().get(0).getName(), LocalDate.now());
-        int i = 0;
-        int n = 0;
-        while(n<bo.size()){
-            Booking b = bo.get(n);
-            LocalTime t = timeSlots.get(i++).getTime();
-            System.out.println("Booking> "+b.getFromTime().toString());
-            System.out.println("Localtime> "+t.toString());
-            if(b.getFromTime().compareTo(t)==0){
-                Reservas.add(new reserva("Pista 1",t,b.getMember().getNickName(),"reservada"));
-                n++;
-            }else{
-                Reservas.add(new reserva("Pista 1",t,"----","no reservada"));
-            }
-        }
-        while(i<timeSlots.size()){
-            LocalTime t = timeSlots.get(i++).getTime();
-            Reservas.add(new reserva("Pista 1",t,"----","no reservada"));
-        }
-        tableview.setItems(Reservas);
+        updateTable(pistas, buscadorNickname.getText());
         pista.setCellValueFactory(new PropertyValueFactory<reserva, String>("pista"));
         hora.setCellValueFactory(new PropertyValueFactory<reserva, String>("hora"));
         member.setCellValueFactory(new PropertyValueFactory<reserva, String>("miembro"));
         disponibilidad.setCellValueFactory(new PropertyValueFactory<reserva, String>("disponibilidad"));
-    }    
+    }  
+    public void updateTable(List<String> pistas, String nombre){
+        Reservas.clear();
+        for(String c : pistas){
+            int i = 0;
+            int n = 0;
+            List<Booking> bo = club.getCourtBookings(c, LocalDate.now());
+            if(nombre.equals("")){
+                while(n<bo.size()){
+                    Booking b = bo.get(n);
+                    LocalTime t = timeSlots.get(i++).getTime();
+                    if(b.getFromTime().compareTo(t)==0){
+                        Reservas.add(new reserva(c,t,b.getMember().getNickName(),"reservada"));
+                        n++;
+                    }else{
+                        Reservas.add(new reserva(c,t,"----","libre"));
+                    }
+                }
+                while(i<timeSlots.size()){
+                    LocalTime t = timeSlots.get(i++).getTime();
+                    Reservas.add(new reserva(c,t,"----","libre"));
+                }
+            }else{
+                while(n<bo.size() && i<timeSlots.size()){
+                    Booking b = bo.get(n++);
+                    LocalTime t = timeSlots.get(i++).getTime();
+                    if(b.getMember().getNickName().equals(nombre)){
+                        Reservas.add(new reserva(c,t,b.getMember().getNickName(),"reservada"));
+                    }
+                }
+            }
+        }
+        
+        tableview.setItems(Reservas);
+    }
 
     @FXML
     private void aplicarFiltrosAction(ActionEvent event) {
+        String value = combo.getValue();
+        if(value.equals("TODAS")){
+            updateTable(pistas, buscadorNickname.getText());
+        }else{
+            updateTable(Arrays.asList(combo.getValue()),buscadorNickname.getText());
+        }
+    }
+
+    @FXML
+    private void combo_action(ActionEvent event) {
     }
     public class TimeSlot {
 

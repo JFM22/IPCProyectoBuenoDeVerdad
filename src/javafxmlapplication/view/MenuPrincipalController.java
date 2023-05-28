@@ -73,7 +73,7 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private HBox hBox_DisponibilidadPistas;
     @FXML
-    private Button reservar_button1;
+    private Button disp_Button;
 
     /**
      * Initializes the controller class.
@@ -93,10 +93,11 @@ public class MenuPrincipalController implements Initializable {
         miPerfil_button.disableProperty().bind(u.getIsNotLoggedProperty());
         misReservas_button.disableProperty().bind(u.getIsNotLoggedProperty());
         NotLoggedLabel.visibleProperty().bind(u.getIsNotLoggedProperty());
+        reservar_button.disableProperty().bind(u.getIsNotLoggedProperty());
         FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/VerDisponibilidad.fxml"));
-        Node root;
+        change_color(hBox_DisponibilidadPistas);
         try {
-            root = loader.load();
+            Node root = loader.load();
             borderpane.setCenter(root);
         } catch (IOException ex) {
             Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,8 +182,8 @@ public class MenuPrincipalController implements Initializable {
     }
 
     @FXML
-    private void verDisponibilidadAction(MouseEvent event) throws IOException {
-        //change_color(hBox_miPerfil);
+    private void verDisponibilidadAction(ActionEvent event) throws IOException {
+        change_color(hBox_DisponibilidadPistas);
         
         FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/VerDisponibilidad.fxml"));
         Node root = loader.load();
