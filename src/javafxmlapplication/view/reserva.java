@@ -5,8 +5,11 @@
 package javafxmlapplication.view;
 
 import java.time.LocalTime;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.Booking;
 
 /**
  *
@@ -17,12 +20,14 @@ public class reserva {
     private final StringProperty hora = new SimpleStringProperty();
     private final StringProperty miembro = new SimpleStringProperty();
     private final StringProperty disponibilidad = new SimpleStringProperty();
+    private final ObjectProperty booking = new SimpleObjectProperty();
         
-    public reserva(String p, LocalTime h, String m, String d) {
+    public reserva(String p, LocalTime h, String m, String d, Booking b) {
         setPista(p);
         setHora(h.toString());
         setMiembro(m);
         setDisponibilidad(d);
+        setBooking(b);
     }
 
     public StringProperty pistaProperty() {
@@ -71,5 +76,15 @@ public class reserva {
 
     public final void setDisponibilidad(String disponibilidad) {
         this.disponibilidadProperty().set(disponibilidad);
+    }
+    public ObjectProperty bookingProperty() {
+        return this.booking;
+    }
+    public final Booking getBooking() {
+        return (Booking)this.bookingProperty().get();
+    }
+
+    public final void setBooking(Booking b) {
+        this.bookingProperty().set(b);
     }
 }
