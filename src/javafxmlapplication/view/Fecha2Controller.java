@@ -131,8 +131,8 @@ public class Fecha2Controller implements Initializable {
         etiquetas= new Label[]{label1,label2,label3,label4,label5,label6,label7,label8,label9,label10,label11,label12,label13};
         pista.setName(Combo.getValue());
         //versionFinal-------
-        user = Usuario.getInstancia();
-       member = user.getUsuario();
+        //user = Usuario.getInstancia();
+       //member = user.getUsuario();
         //pruebas---------
         try {
             
@@ -143,15 +143,15 @@ public class Fecha2Controller implements Initializable {
             Logger.getLogger(Fecha2Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         timeSlotSelected = new SimpleObjectProperty<>();
-        user = Usuario.getInstancia();
-         member = club.getMemberByCredentials("vege", "7777777");
-          user.setUsuario(member);
+        //user = Usuario.getInstancia();
+         //member = club.getMemberByCredentials("vege", "7777777");
+          //user.setUsuario(member);
         //---------------------------------------------------------------------
         //cambia los SlotTime al cambiar de dia
         dpBooking.valueProperty().addListener((a, b, c) -> {
             setTimeSlotsGrid(c,pista);
             labelCol.setText(c.getDayOfWeek().getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault()));
-            
+            label1.setText("AAAAA");
         });
          Combo.valueProperty().addListener((a, b, c) -> {
              pista.setName(c);
@@ -318,7 +318,6 @@ public class Fecha2Controller implements Initializable {
            
             view =  new Pane();
            
-            view.getStyleClass().add("time-slot");
             // ---------------------------------------------------------------
             // de esta manera cambiamos la apariencia del TimeSlot cuando los seleccionamos
             selectedProperty().addListener((obs, wasSelected, isSelected)
@@ -355,14 +354,11 @@ public class Fecha2Controller implements Initializable {
         }
         public void setStyle(boolean ocupado){
         if(ocupado){
-            
-            view.getStyleClass().add("time-slot-ocupado");
+                view.getStyleClass().add("time-slot-ocupado");
+
         }else{
                 view.getStyleClass().add("time-slot-Libre");
 
-        }
-        }
-     
-     }
+        }}}
     
 }
