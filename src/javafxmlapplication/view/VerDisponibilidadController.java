@@ -160,22 +160,22 @@ public class VerDisponibilidadController implements Initializable {
                     Booking b = bo.get(n);
                     LocalTime t = timeSlots.get(i++).getTime();
                     if(b.getFromTime().compareTo(t)==0){
-                        Reservas.add(new reserva(c,t,b.getMember().getNickName(),"reservada"));
+                        Reservas.add(new reserva(c,t,b.getMember().getNickName(),"reservada",b));
                         n++;
                     }else{
-                        Reservas.add(new reserva(c,t,"----","libre"));
+                        Reservas.add(new reserva(c,t,"----","libre",null));
                     }
                 }
                 while(i<timeSlots.size()){
                     LocalTime t = timeSlots.get(i++).getTime();
-                    Reservas.add(new reserva(c,t,"----","libre"));
+                    Reservas.add(new reserva(c,t,"----","libre",null));
                 }
             }else{
                 while(n<bo.size() && i<timeSlots.size()){
                     Booking b = bo.get(n++);
                     LocalTime t = timeSlots.get(i++).getTime();
                     if(b.getMember().getNickName().equals(nombre)){
-                        Reservas.add(new reserva(c,t,b.getMember().getNickName(),"reservada"));
+                        Reservas.add(new reserva(c,t,b.getMember().getNickName(),"reservada",b));
                     }
                 }
             }

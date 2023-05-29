@@ -21,7 +21,7 @@ public class reserva {
     private final StringProperty miembro = new SimpleStringProperty();
     private final StringProperty disponibilidad = new SimpleStringProperty();
     private final ObjectProperty booking = new SimpleObjectProperty();
-        
+         
     public reserva(String p, LocalTime h, String m, String d, Booking b) {
         setPista(p);
         setHora(h.toString());
