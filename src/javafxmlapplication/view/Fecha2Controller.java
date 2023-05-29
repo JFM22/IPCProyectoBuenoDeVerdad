@@ -143,9 +143,9 @@ public class Fecha2Controller implements Initializable {
             Logger.getLogger(Fecha2Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         timeSlotSelected = new SimpleObjectProperty<>();
-        user = Usuario.getInstancia();
-         member = club.getMemberByCredentials("vege", "7777777");
-          user.setUsuario(member);
+        //user = Usuario.getInstancia();
+         //member = club.getMemberByCredentials("vege", "7777777");
+          //user.setUsuario(member);
         //---------------------------------------------------------------------
         //cambia los SlotTime al cambiar de dia
         dpBooking.valueProperty().addListener((a, b, c) -> {
@@ -193,7 +193,7 @@ public class Fecha2Controller implements Initializable {
         //borramos los SlotTime del grid
         ObservableList<Node> children = grid.getChildren();//te lo guarda todo en una ObservableList (los guarda como Node)
         for (TimeSlot timeSlot : timeSlots) {
-           children.remove(timeSlot.getView());
+           //children.remove(timeSlot.getView());
         }
         timeSlots = new ArrayList<>();
         //----------------------------------------------------------------------------------
