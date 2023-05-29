@@ -151,6 +151,7 @@ public class Fecha2Controller implements Initializable {
         dpBooking.valueProperty().addListener((a, b, c) -> {
             setTimeSlotsGrid(c,pista);
             labelCol.setText(c.getDayOfWeek().getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault()));
+            label1.setText("AAAAA");
         });
          Combo.valueProperty().addListener((a, b, c) -> {
              pista.setName(c);
@@ -214,7 +215,7 @@ public class Fecha2Controller implements Initializable {
                     esLibre=true;
                 }
             }
-            
+            //--------------------------------------------------------------
             
             TimeSlot timeSlot = new TimeSlot(startTime, slotLength,etiquetas[LabelIndex],esLibre);
             
@@ -238,6 +239,8 @@ public class Fecha2Controller implements Initializable {
             //solamente puede estar seleccionado un slot dentro de la lista de slot
             timeSlots.forEach(slot -> {
                 slot.setSelected(slot == timeSlot);
+             System.out.println(timeSlot.etiquetaDeTimeSlot().getText());
+            //mio    
                 aux=timeSlot;
                                
 
@@ -263,6 +266,7 @@ public class Fecha2Controller implements Initializable {
                         + aux.getTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));//fin de mensaje
                 Optional<ButtonType> result = alerta.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
+                    
                     ObservableList<String> styles = aux.getView().getStyleClass();
                     if (styles.contains("time-slot")) {//que si que esta disponible
                         styles.remove("time-slot");
@@ -292,7 +296,7 @@ public class Fecha2Controller implements Initializable {
         private final LocalDateTime start;
         private final Duration duration;
         protected final Pane view;
-
+        private Label label;
         private final BooleanProperty selected = new SimpleBooleanProperty();
 
         public final BooleanProperty selectedProperty() {
@@ -309,23 +313,16 @@ public class Fecha2Controller implements Initializable {
 
         public TimeSlot(LocalDateTime start, Duration duration,Label label,boolean esLibre) {
             this.start = start;
-
+            this.label=label;
             this.duration = duration;
-            
-            view = new Pane();
-            view.getStyleClass().add("time-slot");
+           
+            view =  new Pane();
+           
             // ---------------------------------------------------------------
             // de esta manera cambiamos la apariencia del TimeSlot cuando los seleccionamos
             selectedProperty().addListener((obs, wasSelected, isSelected)
                     -> view.pseudoClassStateChanged(SELECTED_PSEUDO_CLASS, isSelected));
-            if(esLibre){
-                label.setText("Libre");
-                System.out.println("AAAAAAAAAA");
-            }else{
-                label.setText("reservada");
-                System.out.println("OOOOOOOO");
-
-            }
+         
 
         }
 
@@ -344,6 +341,9 @@ public class Fecha2Controller implements Initializable {
         public DayOfWeek getDayOfWeek() {
             return start.getDayOfWeek();
         }
+        public Label etiquetaDeTimeSlot(){
+            return label;  
+        }
 
         public Duration getDuration() {
             return duration;
@@ -352,6 +352,13 @@ public class Fecha2Controller implements Initializable {
         public Node getView() {
             return view;
         }
+        public void setStyle(boolean ocupado){
+        if(ocupado){
+                view.getStyleClass().add("time-slot-ocupado");
 
-    }
+        }else{
+                view.getStyleClass().add("time-slot-Libre");
+
+        }}}
+    
 }
