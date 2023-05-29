@@ -38,6 +38,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -53,15 +54,13 @@ import utils.Usuario;
  *
  * @author Usuario
  */
-public class Fecha2Controller implements Initializable {
+public class Fecha2NuevoController1 implements Initializable {
 
     @FXML
     private DatePicker dpBooking;
     @FXML
     private ComboBox<String> Combo;
-    @FXML
     private GridPane grid;
-    @FXML
     private Label labelCol;
     @FXML
     private Button ReservarButton;
@@ -93,34 +92,23 @@ public class Fecha2Controller implements Initializable {
     @FXML
     private Label slotSelected;
     TimeSlot aux;
-    @FXML
     private Label label1;
-    @FXML
     private Label label2;
-    @FXML
     private Label label3;
-    @FXML
     private Label label4;
-    @FXML
     private Label label5;
-    @FXML
     private Label label6;
-    @FXML
     private Label label7;
-    @FXML
     private Label label8;
-    @FXML
     private Label label9;
-    @FXML
     private Label label10;
-    @FXML
     private Label label11;
-    @FXML
     private Label label12;
-    @FXML
     private Label label13;
     private Label []etiquetas;
     int LabelIndex;
+    @FXML
+    private ListView<?> ListaReservas;
     /**
      * Initializes the controller class.
      */
@@ -131,21 +119,21 @@ public class Fecha2Controller implements Initializable {
         etiquetas= new Label[]{label1,label2,label3,label4,label5,label6,label7,label8,label9,label10,label11,label12,label13};
         pista.setName(Combo.getValue());
         //versionFinal-------
-        user = Usuario.getInstancia();
-       member = user.getUsuario();
+        //user = Usuario.getInstancia();
+       //member = user.getUsuario();
         //pruebas---------
         try {
             
             club = Club.getInstance();
         } catch (ClubDAOException ex) {
-            Logger.getLogger(Fecha2Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Fecha2NuevoController1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Fecha2Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Fecha2NuevoController1.class.getName()).log(Level.SEVERE, null, ex);
         }
         timeSlotSelected = new SimpleObjectProperty<>();
-        user = Usuario.getInstancia();
-         member = club.getMemberByCredentials("vege", "7777777");
-          user.setUsuario(member);
+        //user = Usuario.getInstancia();
+         //member = club.getMemberByCredentials("vege", "7777777");
+          //user.setUsuario(member);
         //---------------------------------------------------------------------
         //cambia los SlotTime al cambiar de dia
         dpBooking.valueProperty().addListener((a, b, c) -> {
