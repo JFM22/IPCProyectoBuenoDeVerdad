@@ -85,6 +85,7 @@ import utils.Usuario;
         private ObservableList<reserva> Reservas = FXCollections.observableList(new ArrayList<reserva>());
     @FXML
     private TableColumn<reserva, String> NickName;
+    
 
 
     /**
@@ -95,7 +96,7 @@ import utils.Usuario;
         
         
         
-        user = Usuario.getInstancia();
+        //user = Usuario.getInstancia();
         try {
             
             club = Club.getInstance();
@@ -104,9 +105,11 @@ import utils.Usuario;
         } catch (IOException ex) {
             Logger.getLogger(ReservarPistaController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Member u = club.getMemberByCredentials("vege", "7777777");
-        user.setUsuario(u);
-        member = user.getUsuario();
+        member=Usuario.getInstancia().getUsuario();
+
+        //Member u = club.getMemberByCredentials("vege", "7777777");
+        //user.setUsuario(member);
+        //member = user.getUsuario();
         // TODO
          for(Court c : club.getCourts()){pistas.add(c.getName());}
         Combo.getItems().addAll(pistas);
