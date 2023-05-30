@@ -108,11 +108,11 @@ import utils.Usuario;
         } catch (IOException ex) {
             Logger.getLogger(ReservarPistaController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //member=Usuario.getInstancia().getUsuario();
-
-        Member u = club.getMemberByCredentials("vege", "7777777");
-        user.setUsuario(u);
-       member = user.getUsuario();
+        member=Usuario.getInstancia().getUsuario();
+        
+        //Member u = club.getMemberByCredentials("vege", "7777777");
+        //user.setUsuario(u);
+       //member = user.getUsuario();
         // TODO
          for(Court c : club.getCourts()){pistas.add(c.getName());}
         Combo.getItems().addAll(pistas);
@@ -205,10 +205,92 @@ import utils.Usuario;
     private void ReservarClicked(ActionEvent event) {
         
         reserva reservaSeleccionada =tableview.getSelectionModel().getSelectedItem();
-        //int indiceReserva =tableview.getSelectionModel().getSelectedIndex();
+        int indiceReserva =tableview.getSelectionModel().getSelectedIndex();
+        
         //tableview.getItems().get(indiceReserva);
         Booking bookSeleccionada= reservaSeleccionada.getBooking();
-        if(bookSeleccionada==null){
+        //Booking bookSeleccionada= reservaSeleccionada.getBooking();//esto me indica si está disponible
+        String miNombre=member.getNickName();
+        int caso=0;//caso=1 no puedes reservar mas de dos horas seguidas
+                    
+            
+        Boolean esPosible=true;
+
+        if(indiceReserva>=2 && indiceReserva<=Reservas.size()-3){
+        
+        reserva previo1=Reservas.get(indiceReserva-1);
+        reserva previo2=Reservas.get(indiceReserva-2);
+        Booking bookPre1= previo1.getBooking();
+        Booking bookPre2= previo2.getBooking();
+        reserva posterior1=Reservas.get(indiceReserva+1);
+        reserva posterior2=Reservas.get(indiceReserva+2);
+        Booking bookPos1= posterior1.getBooking();
+        Booking bookPos2= posterior2.getBooking();
+        //te comprueba con los anteriores esta bien
+        if(bookPre1!=null && miNombre.equals(previo1.getMiembro())){
+            if(bookPre2!=null && miNombre.equals(previo2.getMiembro())){
+            esPosible=false;caso=1;
+            }else if (bookPos1!=null && miNombre.equals(posterior1.getMiembro())){esPosible=false;caso=1;}else{esPosible=true;}
+        }
+        //te comprueba con los siguientes esta bien
+        if(bookPos1!=null && miNombre.equals(posterior1.getMiembro())){
+            if(bookPos2!=null && miNombre.equals(posterior2.getMiembro())){
+            esPosible=false;caso=1;
+            }else if (bookPre1!=null && miNombre.equals(previo1.getMiembro())){esPosible=false;caso=1;}else{esPosible=true;}
+        }
+        }
+        else {
+            if(indiceReserva<2){
+                reserva posterior1=Reservas.get(indiceReserva+1);
+            reserva posterior2=Reservas.get(indiceReserva+2);
+            Booking bookPos1= posterior1.getBooking();
+            Booking bookPos2= posterior2.getBooking();
+            if (indiceReserva==0){
+            if(bookPos1!=null && miNombre.equals(posterior1.getMiembro())){
+            
+            if(bookPos2!=null && miNombre.equals(posterior2.getMiembro())){
+            esPosible=false;caso=1;
+            }else{
+            esPosible=true;
+            }}}
+            if(indiceReserva==1){
+            reserva previo1=Reservas.get(indiceReserva-1);
+            Booking bookPre1= previo1.getBooking();
+            if(bookPos1!=null && miNombre.equals(posterior1.getMiembro())){
+            if(bookPos2!=null && miNombre.equals(posterior2.getMiembro())){
+            esPosible=false;caso=1;
+            }else if (bookPre1!=null && miNombre.equals(previo1.getMiembro())){
+            esPosible=false;caso=1;
+            }else{
+            esPosible=true;
+            }}}
+            }
+            if(indiceReserva>Reservas.size()-3){
+            reserva previo1=Reservas.get(indiceReserva-1);
+        reserva previo2=Reservas.get(indiceReserva-2);
+        Booking bookPre1= previo1.getBooking();
+        Booking bookPre2= previo2.getBooking();
+        
+        if(indiceReserva==Reservas.size()-2){
+            
+            reserva posterior1=Reservas.get(indiceReserva+1);
+            Booking bookPos1= posterior1.getBooking();
+                if(bookPre1!=null && miNombre.equals(previo1.getMiembro())){
+            if(bookPre2!=null && miNombre.equals(previo2.getMiembro())){
+            esPosible=false;caso=1;
+            }else if (bookPos1!=null && miNombre.equals(posterior1.getMiembro())){esPosible=false;caso=1;}else{esPosible=true;}
+        }
+            }
+            if(indiceReserva==Reservas.size()-1){
+        
+        if(bookPre1!=null && miNombre.equals(previo1.getMiembro())){
+            if(bookPre2!=null && miNombre.equals(previo2.getMiembro())){
+            esPosible=false;caso=1;
+            }else{esPosible=true;}
+        }}}
+
+        }
+        if(bookSeleccionada==null&&esPosible){
             Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
                 alerta.setTitle("SlotTime");
                 alerta.setHeaderText("Confirma la selección");
@@ -234,12 +316,25 @@ import utils.Usuario;
                 }catch(ClubDAOException e){
                 System.out.println("esta reservado maquina");
                 
-                    }
-                    } else {//ya esta pillada
-                        System.out.println("reservada");
-                        
-                    }
-        }   else{System.out.println("Hola");}
+                    }} 
+        }   else{
+            if(bookSeleccionada!=null||caso!=1 && !miNombre.equals(reservaSeleccionada.getMiembro())){
+                Alert alert4 = new Alert(Alert.AlertType.WARNING);
+                    alert4.setTitle("Advertencia");
+                    alert4.setHeaderText(null);
+                    alert4.setContentText("La pista ya está ocupada");
+                    alert4.showAndWait();
+                  
+            }
+            if(!esPosible&& caso==1){
+            Alert alert4 = new Alert(Alert.AlertType.WARNING);
+                    alert4.setTitle("Advertencia");
+                    alert4.setHeaderText(null);
+                    alert4.setContentText("No se reservar más de dos horas seguidas");
+                    alert4.showAndWait();
+            }
+            
+        }
         
 }
 
