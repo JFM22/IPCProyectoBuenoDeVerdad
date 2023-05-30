@@ -16,6 +16,9 @@ import model.Booking;
  * @author Javier
  */
 public class reserva {
+    private final StringProperty DiaReserva = new SimpleStringProperty();
+    private final StringProperty DiaReservado = new SimpleStringProperty();
+    private final StringProperty DiaReservaHecho = new SimpleStringProperty();
     private final StringProperty pista = new SimpleStringProperty();
     private final StringProperty hora = new SimpleStringProperty();
     private final StringProperty miembro = new SimpleStringProperty();

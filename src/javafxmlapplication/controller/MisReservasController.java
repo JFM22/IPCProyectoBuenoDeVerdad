@@ -4,6 +4,7 @@
  */
 package javafxmlapplication.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,6 +27,23 @@ import model.Court;
 import model.Member;
 import utils.Usuario;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import model.Club;
+import model.ClubDAOException;
 /**
  * FXML Controller class
  *
@@ -58,10 +76,15 @@ public class MisReservasController implements Initializable {
     
     private LocalDate diaReservado;
     
-    private LocalDate HoraReserva;
+    private LocalDate diaReserva2;
 
     Member miembro;
+    Club club;
     
+    long dato = 1;
+    
+    private ObservableList<Booking> Bookings = FXCollections.observableList(new ArrayList<Booking>());
+    private List<Booking> listBooking = new ArrayList<>(); 
     
     @FXML
     private Label Label;
@@ -70,24 +93,72 @@ public class MisReservasController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        DayBooked.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getBookingDate().toString()));
-        hora.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getFromTime().toString()));
-        ReservedDay.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getMadeForDay().toString()));
-        member.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getMember().toString()));
-        pista.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getCourt().toString()));
-        Paid.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getPaid().toString()));
-        ReservedDay.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getMadeForDay().toString()));
+        tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         miembro = Usuario.getInstancia().getUsuario();
+        try {
+            club = Club.getInstance();
+        } catch (ClubDAOException ex) {
+            Logger.getLogger(MisReservasController.class.getName()).log(Level.SEVERE, null, ex);    
+        } catch (IOException ex) {
+            Logger.getLogger(MisReservasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        listBooking = club.getUserBookings(miembro.getNickName());
+        ActualizarTabla(listBooking);
+        DayBooked.setCellValueFactory(cellData -> {
+            Booking item = cellData.getValue();
+            String day = item.getBookingDate().toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            return new SimpleStringProperty(day);
+        });
+        ReservedDay.setCellValueFactory(cellData -> {
+            Booking item = cellData.getValue();
+            String Rday = item.getMadeForDay().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            return new SimpleStringProperty(Rday);
+        });
+        hora.setCellValueFactory(cellData -> {
+            Booking item = cellData.getValue();
+            String hora = item.getFromTime().toString();
+            return new SimpleStringProperty(hora);
+        });
+        pista.setCellValueFactory(cellData -> {
+            Booking item = cellData.getValue();
+            String court = item.getCourt().getName().substring(5);
+            return new SimpleStringProperty(court);
+        });
+         Paid.setCellValueFactory(cellData -> {
+            Booking item = cellData.getValue();
+            String pagado = item.getPaid().toString();
+            return new SimpleStringProperty(pagado);
+        });
+          member.setCellValueFactory(cellData -> {
+            Booking item = cellData.getValue();
+            String mem1 = item.getMember().getNickName();
+            return new SimpleStringProperty(mem1);
+        });
+
+
+//        hora.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getFromTime().toString()));
+//        ReservedDay.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getMadeForDay().toString()));
+//        member.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getMember().toString()));
+//        pista.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getCourt().toString()));
+//        Paid.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getPaid().toString()));
+//        ReservedDay.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getMadeForDay().toString()));
+//       
     }    
     
-    public boolean Pagada(){
-        return estaPagada; 
+    public void ActualizarTabla(List<Booking> LB){
+        Bookings.clear();
+        for(Booking b: LB){
+        Bookings.add(b);
+   
+        }
+        System.out.println(Bookings.size());
+        tableview.setItems(Bookings);
     }
-
+    
     @FXML
-    private void pagarReserva(ActionEvent event) {
-        //if(miembro.checkHasCreditInfo()== false){pagar.setDisable(true);}
-        if(!estaPagada){
+    private void pagarReserva(ActionEvent event) throws IOException {
+       if(miembro.checkHasCreditInfo()==false){
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Hacer el pago de la pista");
             alert.setHeaderText("Tienes el pago de la reserva pendiente");
@@ -98,25 +169,40 @@ public class MisReservasController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()){
                 if(result.get() == buttonTypeOne){
-                    Alert alert3 = new Alert(AlertType.INFORMATION);
-                    alert3.setTitle("Pago de la reserva");
-                    alert3.setHeaderText(null);
-                    alert3.setContentText("El pago de la reserva ha sido realizado correctamente");
-                    alert3.showAndWait();
+                FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/javafxmlapplication/view/tarjetaCredito.fxml"));
+                Stage stage = new Stage();
+                Parent root = miCargador.load();
+                //VistaPersonaController controlPersona = miCargador.getController();
+                //Persona persona = personasListView.getSelectionModel().getSelectedItem();
+                //controlPersona.initPersona(persona);
+                Scene scene = new Scene(root, 500, 300);
+                stage.setScene(scene);
+                stage.setTitle("Introducir Tarjeta");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+                   // Alert alert3 = new Alert(AlertType.INFORMATION);
+                   // alert3.setTitle("Pago de la reserva");
+                   // alert3.setHeaderText(null);
+                   // alert3.setContentText("El pago de la reserva ha sido realizado correctamente");
+                   // alert3.showAndWait();
                 }
                 if(result.get() == buttonTypeTwo){
                     System.out.println("Pagar más tarde");
                 }
             } 
-        }
+       }
     }
     @FXML
-    private void cancelarReserva(ActionEvent event) {
+    private void cancelarReserva(ActionEvent event) throws ClubDAOException {
             Booking selectedItem = tableview.getSelectionModel().getSelectedItem();
             diaReserva = selectedItem.getBookingDate();
             diaReservado = selectedItem.getMadeForDay();
-            HoraReserva = diaReserva.toLocalDate();
-            int DifH = diaReservado.compareTo(HoraReserva);
+            diaReserva2 = LocalDate.now();
+            //int DifH = diaReservado.compareTo(HoraReserva);
+            long diferenciasEnDias = Math.abs(ChronoUnit.DAYS.between(diaReservado,diaReserva2));
+            System.out.println(diaReservado.toString());
+            System.out.println(diaReserva2.toString());
+            System.out.println(diferenciasEnDias);
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Cancelar Reserva");
             alert.setHeaderText("Quieres cancelar esta reserva");
@@ -127,8 +213,9 @@ public class MisReservasController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()){
                 if(result.get() == buttonTypeTwo){
-                  if(DifH > 1) {  
+                  if(diferenciasEnDias > dato) {  
                     tableview.getItems().remove(selectedItem);
+                    club.removeBooking(selectedItem);
                     Alert alert2 = new Alert(AlertType.INFORMATION);
                     alert2.setTitle("Cancelar Reserva");
                     alert2.setHeaderText(null);
@@ -139,6 +226,7 @@ public class MisReservasController implements Initializable {
                     alert4.setTitle("Advertencia");
                     alert4.setHeaderText(null);
                     alert4.setContentText("No se puede cancelar la reserva ya que quedan menos de 24 horas para su uso");
+                    alert4.showAndWait();
                   }
                 }
                 if(result.get() == buttonTypeOne){
