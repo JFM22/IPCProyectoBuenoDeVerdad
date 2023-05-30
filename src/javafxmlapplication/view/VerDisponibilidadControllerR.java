@@ -42,7 +42,7 @@ import model.Court;
  *
  * @author Javier
  */
-public class VerDisponibilidadController implements Initializable {
+public class VerDisponibilidadControllerR implements Initializable {
 
     @FXML
     private TextField buscadorNickname;

@@ -51,6 +51,7 @@ public class MenuPrincipalController implements Initializable {
     private Button miPerfil_button;
     
     private HBox anterior;
+    private Button anterior_b;
     @FXML
     private HBox hBox_Reservar;
     @FXML
@@ -95,7 +96,7 @@ public class MenuPrincipalController implements Initializable {
         NotLoggedLabel.visibleProperty().bind(u.getIsNotLoggedProperty());
         reservar_button.disableProperty().bind(u.getIsNotLoggedProperty());
         FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/VerDisponibilidad.fxml"));
-        change_color(hBox_DisponibilidadPistas);
+        change_color(hBox_DisponibilidadPistas,disp_Button);
         try {
             Node root = loader.load();
             borderpane.setCenter(root);
@@ -104,18 +105,22 @@ public class MenuPrincipalController implements Initializable {
         }
     }    
     
-    private void change_color(HBox hbox){
+    private void change_color(HBox hbox,Button b){
         if(anterior.equals(hbox)) return;
         hbox.setBackground(background_transparente);
-        
+        b.getStyleClass().add("button-hold");
+        //anterior_b.getStyleClass().remove("button-hold");
+        //anterior_b.getStyleClass().add("button-not-hold");
         if(anterior != null) anterior.setBackground(background);
+        if(anterior_b != null) anterior_b.getStyleClass().remove("button-hold");
         
+        anterior_b = b;
         anterior = hbox;
     }
     
     @FXML
     private void reservarAction(ActionEvent event) throws IOException {
-        change_color(hBox_Reservar);
+        change_color(hBox_Reservar,reservar_button);
         FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/reservarPistas.fxml"));
         Node root = loader.load();
         borderpane.setCenter(root);
@@ -123,7 +128,7 @@ public class MenuPrincipalController implements Initializable {
 
     @FXML
     private void misReservasAction(ActionEvent event) throws IOException {
-        change_color(hBox_misReservas);
+        change_color(hBox_misReservas,misReservas_button);
         
         FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/misReservas.fxml"));
         Node root = loader.load();
@@ -132,7 +137,7 @@ public class MenuPrincipalController implements Initializable {
 
     @FXML
     private void miPerfilAction(ActionEvent event) throws IOException {
-        change_color(hBox_miPerfil);
+        change_color(hBox_miPerfil,miPerfil_button);
         
         FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/MiPerfil.fxml"));
         Node root = loader.load();
@@ -183,10 +188,14 @@ public class MenuPrincipalController implements Initializable {
 
     @FXML
     private void verDisponibilidadAction(ActionEvent event) throws IOException {
-        change_color(hBox_DisponibilidadPistas);
+        change_color(hBox_DisponibilidadPistas,disp_Button);
         
         FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/VerDisponibilidad.fxml"));
         Node root = loader.load();
         borderpane.setCenter(root);
+    }
+
+    @FXML
+    private void verDisponibilidadAction(MouseEvent event) {
     }
 }

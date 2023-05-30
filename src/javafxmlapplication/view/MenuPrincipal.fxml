@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../../estilos/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.view.MenuPrincipalController">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../../estilos/styles_menuPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.view.MenuPrincipalController">
    <left>
       <VBox fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="161.0" BorderPane.alignment="TOP_CENTER">
          <children>
@@ -22,9 +22,9 @@
                <children>
                   <HBox fx:id="hBox_DisponibilidadPistas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#verDisponibilidadAction">
                      <children>
-                        <Button fx:id="disp_Button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#verDisponibilidadAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #FFD700;" text="Disponibilidad de las pistas" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="disp_Button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#verDisponibilidadAction" prefHeight="70.0" prefWidth="130.0" text="Disponibilidad de las pistas" textAlignment="CENTER" wrapText="true">
                            <font>
-                              <Font size="17.0" />
+                              <Font size="16.0" />
                            </font>
                         </Button>
                      </children>
@@ -35,7 +35,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox fx:id="hBox_Reservar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button fx:id="reservar_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#reservarAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #FFD700;" text="Reservar Pista" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="reservar_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#reservarAction" prefHeight="70.0" prefWidth="130.0" text="Reservar Pista" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="17.0" />
                            </font></Button>
@@ -50,7 +50,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox fx:id="hBox_misReservas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button fx:id="misReservas_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#misReservasAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #1E90FF;" text="Mis reservas">
+                        <Button fx:id="misReservas_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#misReservasAction" prefHeight="70.0" prefWidth="130.0" text="Mis reservas">
                            <font>
                               <Font size="17.0" />
                            </font></Button>
@@ -62,7 +62,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox fx:id="hBox_miPerfil" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button fx:id="miPerfil_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#miPerfilAction" prefHeight="70.0" prefWidth="130.0" style="-fx-background-color: #F0F0F0;" text="Mi perfil">
+                        <Button fx:id="miPerfil_button" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#miPerfilAction" prefHeight="70.0" prefWidth="130.0" text="Mi perfil">
                            <font>
                               <Font size="17.0" />
                            </font></Button>
@@ -93,6 +93,9 @@
                   <Insets bottom="50.0" />
                </padding></VBox>
          </children>
+         <BorderPane.margin>
+            <Insets right="20.0" />
+         </BorderPane.margin>
       </VBox>
    </left>
    <top>
@@ -131,10 +134,13 @@
                </HBox.margin>
             </HBox>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </HBox>
    </top>
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.2, 0, 0);" BorderPane.alignment="CENTER">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.2, 0, 0);" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>

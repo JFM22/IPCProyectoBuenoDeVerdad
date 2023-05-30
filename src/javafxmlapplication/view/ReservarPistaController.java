@@ -36,6 +36,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import model.Booking;
 import model.Club;
 import model.ClubDAOException;
@@ -85,6 +86,8 @@ import utils.Usuario;
         private ObservableList<reserva> Reservas = FXCollections.observableList(new ArrayList<reserva>());
     @FXML
     private TableColumn<reserva, String> NickName;
+    @FXML
+    private ImageView imagen1;
     
 
 
