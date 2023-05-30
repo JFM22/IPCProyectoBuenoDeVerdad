@@ -27,7 +27,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -43,7 +42,7 @@ import model.Court;
  *
  * @author Javier
  */
-public class VerDisponibilidadController implements Initializable {
+public class VerDisponibilidadControllerR2 implements Initializable {
 
     @FXML
     private TextField buscadorNickname;
@@ -89,8 +88,7 @@ public class VerDisponibilidadController implements Initializable {
         for(Court c : club.getCourts()){pistas.add(c.getName());}
         combo.getItems().addAll(pistas);
         combo.setValue("TODAS");
-        tableview.setPlaceholder(new Label("No se han encontrado resultados."));
-        tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
         buscadorNickname.textProperty().addListener((a,oldV,newV)->{
             if(newV.contains(" ")){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
