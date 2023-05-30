@@ -179,20 +179,21 @@ public class MisReservasController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()){
                 if(result.get() == buttonTypeOne){
-                
-                FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/javafxmlapplication/view/tarjetaCredito.fxml"));
-                Stage stage = new Stage();
-                Parent root = miCargador.load();
-                //VistaPersonaController controlPersona = miCargador.getController();
-                //Persona persona = personasListView.getSelectionModel().getSelectedItem();
-                //controlPersona.initPersona(persona);
-                Scene scene = new Scene(root, 500, 300);
-                stage.setScene(scene);
-                TarjetaCreditoController t = miCargador.getController();
-                t.booking(tableview.getFocusModel().getFocusedItem());
-                stage.setTitle("Introducir Tarjeta");
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.showAndWait();
+                        if(!miembro.checkHasCreditInfo()){
+                        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/javafxmlapplication/view/tarjetaCredito.fxml"));
+                        Stage stage = new Stage();
+                        Parent root = miCargador.load();
+                        //VistaPersonaController controlPersona = miCargador.getController();
+                        //Persona persona = personasListView.getSelectionModel().getSelectedItem();
+                        //controlPersona.initPersona(persona);
+                        Scene scene = new Scene(root, 500, 300);
+                        stage.setScene(scene);
+                        TarjetaCreditoController t = miCargador.getController();
+                        t.booking(tableview.getFocusModel().getFocusedItem());
+                        stage.setTitle("Introducir Tarjeta");
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.showAndWait();
+                    } else {tableview.getFocusModel().getFocusedItem().setPaid(true);}
                 listBooking = club.getUserBookings(miembro.getNickName());
                 ActualizarTabla(listBooking);
                    // Alert alert3 = new Alert(AlertType.INFORMATION);
@@ -205,8 +206,9 @@ public class MisReservasController implements Initializable {
                     System.out.println("Pagar más tarde");
                 }
             } 
-       //}
-    }
+       }
+    
+
     @FXML
     private void cancelarReserva(ActionEvent event) throws ClubDAOException {
             Booking selectedItem = tableview.getSelectionModel().getSelectedItem();
@@ -248,14 +250,6 @@ public class MisReservasController implements Initializable {
                     System.out.println("Cancelado");
                 }
             }
-            
-    }
-
-    @FXML
-    private void LabelCondition(MouseEvent event) {
-        if(miembro.checkHasCreditInfo()== false){Label.setVisible(false);}
-        else{Label.setVisible(true); 
-        }
-    }
+        }  
     
 }

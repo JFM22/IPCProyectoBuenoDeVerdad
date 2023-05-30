@@ -47,7 +47,7 @@
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Label fx:id="Label" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#LabelCondition" text="No tienes tarjeta, modifica tu perfil para añadirla" textAlignment="CENTER" textFill="RED" wrapText="true">
+                        <Label fx:id="Label" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="No tienes tarjeta, modifica tu perfil para añadirla" textAlignment="CENTER" textFill="RED" wrapText="true">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
