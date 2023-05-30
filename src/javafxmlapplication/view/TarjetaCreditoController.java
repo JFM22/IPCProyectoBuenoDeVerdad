@@ -6,10 +6,15 @@ package javafxmlapplication.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import model.Booking;
+import model.Member;
+import utils.Usuario;
 
 /**
  * FXML Controller class
@@ -22,13 +27,21 @@ public class TarjetaCreditoController implements Initializable {
     private TextField field_tarjeta;
     @FXML
     private TextField field_cvv;
-
+    @FXML
+    private Button Aceptar;
+    @FXML
+    private Button cancelar;
+    
+    private Booking ReservaActual;
+    
+    Member miembro;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
         field_tarjeta.textProperty().addListener((a,oldV,newV)->{
             if(!newV.equals("") && !newV.matches("\\d+")){
                 launch_error_inm("El número de la tarjeta está formado solo por números");
@@ -55,6 +68,24 @@ public class TarjetaCreditoController implements Initializable {
                 alert.setTitle("Error en formato");
                 alert.setHeaderText(s);
                 alert.showAndWait();
+    }
+
+    public void booking(Booking g){
+        ReservaActual = g;
+    }
+    
+    @FXML
+    private void AceptarTarjeta(ActionEvent event) {
+        miembro = Usuario.getInstancia().getUsuario();
+        miembro.setCreditCard(field_tarjeta.getText());
+        miembro.setSvc(Integer.parseInt(field_cvv.getText()));
+        ReservaActual.setPaid(Boolean.TRUE);
+        Aceptar.getScene().getWindow().hide();
+    }
+
+    @FXML
+    private void CancelarOperacion(ActionEvent event) {
+         cancelar.getScene().getWindow().hide();
     }
     
 }

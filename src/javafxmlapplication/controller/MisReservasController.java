@@ -33,6 +33,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +46,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafxmlapplication.view.TarjetaCreditoController;
 import model.Club;
 import model.ClubDAOException;
 /**
@@ -93,8 +98,11 @@ public class MisReservasController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         miembro = Usuario.getInstancia().getUsuario();
+        Label.visibleProperty().bind(Bindings.not(new SimpleBooleanProperty(miembro.checkHasCreditInfo())));
+        
         try {
             club = Club.getInstance();
         } catch (ClubDAOException ex) {
@@ -127,8 +135,11 @@ public class MisReservasController implements Initializable {
         });
          Paid.setCellValueFactory(cellData -> {
             Booking item = cellData.getValue();
-            String pagado = item.getPaid().toString();
-            return new SimpleStringProperty(pagado);
+            boolean pagado = item.getPaid();
+            String res;
+            if(pagado){res = "pagado";}
+            else{res = "no pagado";}
+            return new SimpleStringProperty(res);
         });
           member.setCellValueFactory(cellData -> {
             Booking item = cellData.getValue();
@@ -150,7 +161,6 @@ public class MisReservasController implements Initializable {
         Bookings.clear();
         for(Booking b: LB){
         Bookings.add(b);
-   
         }
         System.out.println(Bookings.size());
         tableview.setItems(Bookings);
@@ -158,7 +168,7 @@ public class MisReservasController implements Initializable {
     
     @FXML
     private void pagarReserva(ActionEvent event) throws IOException {
-       if(miembro.checkHasCreditInfo()==false){
+       //if(miembro.checkHasCreditInfo()==false){
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Hacer el pago de la pista");
             alert.setHeaderText("Tienes el pago de la reserva pendiente");
@@ -169,6 +179,7 @@ public class MisReservasController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()){
                 if(result.get() == buttonTypeOne){
+                
                 FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/javafxmlapplication/view/tarjetaCredito.fxml"));
                 Stage stage = new Stage();
                 Parent root = miCargador.load();
@@ -177,9 +188,13 @@ public class MisReservasController implements Initializable {
                 //controlPersona.initPersona(persona);
                 Scene scene = new Scene(root, 500, 300);
                 stage.setScene(scene);
+                TarjetaCreditoController t = miCargador.getController();
+                t.booking(tableview.getFocusModel().getFocusedItem());
                 stage.setTitle("Introducir Tarjeta");
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
+                listBooking = club.getUserBookings(miembro.getNickName());
+                ActualizarTabla(listBooking);
                    // Alert alert3 = new Alert(AlertType.INFORMATION);
                    // alert3.setTitle("Pago de la reserva");
                    // alert3.setHeaderText(null);
@@ -190,7 +205,7 @@ public class MisReservasController implements Initializable {
                     System.out.println("Pagar más tarde");
                 }
             } 
-       }
+       //}
     }
     @FXML
     private void cancelarReserva(ActionEvent event) throws ClubDAOException {
