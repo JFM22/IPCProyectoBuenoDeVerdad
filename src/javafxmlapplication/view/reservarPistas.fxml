@@ -89,7 +89,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <ComboBox fx:id="Combo" prefWidth="150.0">
+                        <ComboBox fx:id="Combo" onAction="#ComboAction" prefWidth="150.0">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin></ComboBox>

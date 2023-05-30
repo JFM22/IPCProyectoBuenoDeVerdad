@@ -99,7 +99,7 @@ import utils.Usuario;
         
         
         
-        //user = Usuario.getInstancia();
+        user = Usuario.getInstancia();
         try {
             
             club = Club.getInstance();
@@ -108,11 +108,11 @@ import utils.Usuario;
         } catch (IOException ex) {
             Logger.getLogger(ReservarPistaController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        member=Usuario.getInstancia().getUsuario();
+        //member=Usuario.getInstancia().getUsuario();
 
-        //Member u = club.getMemberByCredentials("vege", "7777777");
-        //user.setUsuario(member);
-        //member = user.getUsuario();
+        Member u = club.getMemberByCredentials("vege", "7777777");
+        user.setUsuario(u);
+       member = user.getUsuario();
         // TODO
          for(Court c : club.getCourts()){pistas.add(c.getName());}
         Combo.getItems().addAll(pistas);
@@ -140,13 +140,13 @@ import utils.Usuario;
          
          //dpBooking.setOnAction(event -> updateListView());
          dpBooking.valueProperty().addListener((a, b, c)->{
-             updateTableView(c,pistaSeleccionada);
+             updateTableView();
               
          });
-         Combo.valueProperty().addListener((a, b, c)->{
-             pistaSeleccionada.setName(c);
-             updateTableView(dpBooking.getValue(),pistaSeleccionada);
-         });
+         //Combo.valueProperty().addListener((a, b, c)->{
+            
+
+        // });
           timeSlots = new ArrayList<>();
         //club.addSimpleData();
         //----------------------------------------------------------------------------------
@@ -163,15 +163,17 @@ import utils.Usuario;
         timeSlots.add(timeSlot);
   
         }
-        updateTableView(dpBooking.getValue(),pistaSeleccionada);
+        updateTableView();
         Hora.setCellValueFactory(new PropertyValueFactory<reserva, String>("hora"));
         Disponibilidad.setCellValueFactory(new PropertyValueFactory<reserva, String>("disponibilidad"));
          NickName.setCellValueFactory(new PropertyValueFactory<reserva, String>("miembro"));
 
     }    
-        private void updateTableView(LocalDate date,Court pista){
+        private void updateTableView(){
+            LocalDate date=dpBooking.getValue();
             Reservas.clear();
-            List<Booking> bookOcupadas = club.getCourtBookings(pista.getName(), date);
+           
+            List<Booking> bookOcupadas = club.getCourtBookings(Combo.getValue(), date);
             int n = 0;
             int i=0;
             while(n<bookOcupadas.size()){
@@ -179,19 +181,19 @@ import utils.Usuario;
                     LocalTime t = timeSlots.get(i++).getTime();
                     if(b.getFromTime().compareTo(t)==0){
                        if(b.getMember().getNickName().equals(member.getName())){
-                       Reservas.add(new reserva(pista.getName(),t,b.getMember().getNickName(),"reservada por ti",b));
+                       Reservas.add(new reserva(Combo.getValue(),t,b.getMember().getNickName(),"reservada por ti",b));
 
                        } 
-                       else{Reservas.add(new reserva(pista.getName(),t,b.getMember().getNickName(),"reservada",b));}
+                       else{Reservas.add(new reserva(Combo.getValue(),t,b.getMember().getNickName(),"reservada",b));}
                         n++;
                     }else{
-                        Reservas.add(new reserva(pista.getName(),t,"----","libre",null));
+                        Reservas.add(new reserva(Combo.getValue(),t,"----","libre",null));
                     }
                     
             }
              while(i<timeSlots.size()){
                     LocalTime t = timeSlots.get(i++).getTime();
-                    Reservas.add(new reserva(pista.getName(),t,"----","libre",null));
+                    Reservas.add(new reserva(Combo.getValue(),t,"----","libre",null));
                 }
            tableview.setItems(Reservas); 
  
@@ -203,8 +205,8 @@ import utils.Usuario;
     private void ReservarClicked(ActionEvent event) {
         
         reserva reservaSeleccionada =tableview.getSelectionModel().getSelectedItem();
-        int indiceReserva =tableview.getSelectionModel().getSelectedIndex();
-        tableview.getItems().get(indiceReserva);
+        //int indiceReserva =tableview.getSelectionModel().getSelectedIndex();
+        //tableview.getItems().get(indiceReserva);
         Booking bookSeleccionada= reservaSeleccionada.getBooking();
         if(bookSeleccionada==null){
             Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
@@ -217,12 +219,15 @@ import utils.Usuario;
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                 //-------------------------------------------------------------------------------------
                 LocalDate fechaSeleccionada =dpBooking.getValue();
-                horaInicio=LocalTime.parse(reservaSeleccionada.getHora());
-                pistaSeleccionada.setName(Combo.getValue());
-                try{
                 
-                club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,paid,pistaSeleccionada,member); 
-                updateTableView(dpBooking.getValue(),pistaSeleccionada);
+                horaInicio=LocalTime.parse(reservaSeleccionada.getHora());
+                
+                //pistaSeleccionada.setName(Combo.getValue());
+                try{
+                 
+                    
+                club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,paid,club.getCourt(Combo.getValue()),member); 
+                updateTableView();
                 System.out.println("libre y registrada crack");
                 
 
@@ -237,6 +242,12 @@ import utils.Usuario;
         }   else{System.out.println("Hola");}
         
 }
+
+    @FXML
+    private void ComboAction(ActionEvent event) {
+      
+             updateTableView();
+    }
     
     public class TimeSlot {
 
