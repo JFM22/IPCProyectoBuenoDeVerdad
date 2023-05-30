@@ -290,6 +290,7 @@ import utils.Usuario;
         }}}
 
         }
+        //----------------------------------------------------------------------
         if(bookSeleccionada==null&&esPosible){
             Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
                 alerta.setTitle("SlotTime");
@@ -299,9 +300,10 @@ import utils.Usuario;
                         +reservaSeleccionada.getHora());//fin de mensaje
                 Optional<ButtonType> result = alerta.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
-                //-------------------------------------------------------------------------------------
+                    if(member.checkHasCreditInfo()==true){
+                    //-------------------------------------------------------------------------------------
                 LocalDate fechaSeleccionada =dpBooking.getValue();
-                
+                paid=true;
                 horaInicio=LocalTime.parse(reservaSeleccionada.getHora());
                 
                 //pistaSeleccionada.setName(Combo.getValue());
@@ -310,13 +312,34 @@ import utils.Usuario;
                     
                 club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,paid,club.getCourt(Combo.getValue()),member); 
                 updateTableView();
-                System.out.println("libre y registrada crack");
+                Alert alert4 = new Alert(Alert.AlertType.WARNING);
+                    alert4.setTitle("Información");
+                    alert4.setHeaderText(null);
+                    alert4.setContentText("Pista reservada y pagada");
+                    alert4.showAndWait();
                 
 
                 }catch(ClubDAOException e){
-                System.out.println("esta reservado maquina");
                 
-                    }} 
+                }}else{
+                   LocalDate fechaSeleccionada =dpBooking.getValue();
+                paid=false;
+                horaInicio=LocalTime.parse(reservaSeleccionada.getHora());
+                
+                //pistaSeleccionada.setName(Combo.getValue());
+                try{
+                 
+                    
+                club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,paid,club.getCourt(Combo.getValue()),member); 
+                updateTableView();
+                Alert alert4 = new Alert(Alert.AlertType.WARNING);
+                    alert4.setTitle("Información");
+                    alert4.setHeaderText(null);
+                    alert4.setContentText("Pista reservada, para pagarla accede al apartado mis reservas ");
+                    alert4.showAndWait();
+                
+
+                }catch(ClubDAOException e){}}} 
         }   else{
             if(bookSeleccionada!=null||caso!=1 && !miNombre.equals(reservaSeleccionada.getMiembro())){
                 Alert alert4 = new Alert(Alert.AlertType.WARNING);
