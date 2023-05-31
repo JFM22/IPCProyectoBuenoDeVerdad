@@ -180,8 +180,17 @@ import utils.Usuario;
         
         reserva reservaSeleccionada =tableview.getSelectionModel().getSelectedItem();
         int indiceReserva =tableview.getSelectionModel().getSelectedIndex();
-          
-           
+       
+        
+       if(LocalTime.parse(reservaSeleccionada.getHora().substring(0,5)).compareTo(LocalTime.now())<0 && dpBooking.getValue().compareTo(LocalDate.now())==0){
+       Alert alert4 = new Alert(Alert.AlertType.WARNING);
+                    alert4.setTitle("Advertencia");
+                    alert4.setHeaderText(null);
+                    alert4.setContentText("Esa hora ya ha pasado");
+                    alert4.showAndWait();
+       }else{
+       
+       
            
 
         Booking bookSeleccionada= reservaSeleccionada.getBooking();
@@ -267,6 +276,7 @@ import utils.Usuario;
         }
         //----------------------------------------------------------------------
         if(bookSeleccionada==null&&esPosible){
+            
             Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
                 alerta.setTitle("SlotTime");
                 alerta.setHeaderText("Confirma la selección");
@@ -326,7 +336,7 @@ import utils.Usuario;
                     alert4.showAndWait();
             }
             
-        }
+        }}
            
         
 }
