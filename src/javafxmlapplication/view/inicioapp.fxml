@@ -23,13 +23,13 @@
             </ImageView>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GreenBall">
                <font>
-                  <Font name="System Bold" size="34.0" />
+                  <Font name="System Bold" size="39.0" />
                </font>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Text>
-            <Text fill="#00ffaf" strokeType="OUTSIDE" strokeWidth="0.0" text="La manera más fácil de reservar una pista de tenis">
+            <Text stroke="#00eaff" strokeType="OUTSIDE" text="La manera más fácil de reservar una pista de tenis">
                <VBox.margin>
                   <Insets bottom="50.0" />
                </VBox.margin>
