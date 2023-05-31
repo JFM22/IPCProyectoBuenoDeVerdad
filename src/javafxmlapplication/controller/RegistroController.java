@@ -74,6 +74,8 @@ public class RegistroController implements Initializable {
     Image im;
     @FXML
     private HBox main;
+    @FXML
+    private StackPane stackpane;
 
     /**
      * Initializes the controller class.
@@ -220,6 +222,13 @@ public class RegistroController implements Initializable {
     @FXML
     private void volver(ActionEvent event){
         JavaFXMLApplication.setRoot("inicioapp");
+    }
+
+    @FXML
+    private void button_autenticarse(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxmlapplication/view/autenticarse.fxml"));
+        Parent root = loader.load();
+        JavaFXMLApplication.setRoot(root);
     }
     
 }

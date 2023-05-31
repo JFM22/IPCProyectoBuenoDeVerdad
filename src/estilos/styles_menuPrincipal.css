@@ -35,3 +35,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-color: #f4f4f4ff;
     -fx-border-radius: 5px;
 }
+#button_imagen:hover{
+    -fx-background-color: #d9d9d9;
+}

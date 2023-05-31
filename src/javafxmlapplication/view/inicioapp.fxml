@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -29,14 +30,17 @@
                   <Insets />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="La manera más fácil de reservar una pista de tenis" textAlignment="CENTER">
+            <Label opacity="0.78" style="-fx-background-color: lightblue;" text="La forma más fácil de reservar una pista de tenis" textFill="#0037ff">
                <VBox.margin>
                   <Insets bottom="50.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Italic" size="14.0" />
+                  <Font name="System Italic" size="13.0" />
                </font>
-            </Text>
+               <padding>
+                  <Insets left="4.0" right="4.0" />
+               </padding>
+            </Label>
             <HBox alignment="CENTER" prefWidth="200.0" spacing="50.0">
                <children>
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#aut_button" prefHeight="192.0" prefWidth="210.0" style="-fx-background-radius: 0;">
@@ -48,11 +52,11 @@
                                     <Image url="@../../icons/autenticarse.png" />
                                  </image>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autenticarse">
+                              <Label text="Autenticarse">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="System Bold" size="23.0" />
                                  </font>
-                              </Text>
+                              </Label>
                            </children>
                         </VBox>
                      </graphic>
@@ -66,29 +70,30 @@
                                     <Image url="@../../icons/registro.png" />
                                  </image>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Crear cuenta">
+                              <Label text="Crear Cuenta">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="System Bold" size="23.0" />
                                  </font>
-                              </Text>
+                              </Label>
                            </children>
                         </VBox>
                      </graphic>
                   </Button>
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#inivitadoAction" prefHeight="192.0" prefWidth="210.0" style="-fx-background-radius: 0;">
                      <graphic>
-                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0">
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity">
                            <children>
                               <ImageView fitHeight="118.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../icons/invitado.png" />
                                  </image>
                               </ImageView>
-                              <Text fx:id="UserTexto" strokeType="OUTSIDE" strokeWidth="0.0">
+                              <Label text="Entrar como" />
+                              <Label fx:id="UserTexto" text="Label">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="System Bold" size="23.0" />
                                  </font>
-                              </Text>
+                              </Label>
                            </children>
                         </VBox>
                      </graphic>

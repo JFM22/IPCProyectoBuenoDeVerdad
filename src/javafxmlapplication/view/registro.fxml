@@ -32,9 +32,9 @@
                         <Font size="39.0" />
                      </font>
                   </Text>
-                  <GridPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" vgap="5.0">
+                  <GridPane hgap="3.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" vgap="5.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.20001220703125" minWidth="10.0" prefWidth="103.2" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="216.20001220703125" minWidth="10.0" prefWidth="103.2" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.00001525878906" minWidth="10.0" prefWidth="340.0" />
                     </columnConstraints>
                     <rowConstraints>
@@ -199,14 +199,41 @@
                      </VBox.margin>
                   </GridPane>
                   <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="* : Campo opcional" />
-                  <Button mnemonicParsing="false" onAction="#button_confirmar" prefHeight="34.0" prefWidth="130.0" text="Confirmar">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="30.0" top="40.0" />
-                     </VBox.margin>
-                  </Button>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#button_confirmar" prefHeight="34.0" prefWidth="130.0" text="Confirmar">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <GridPane HBox.hgrow="ALWAYS">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#button_autenticarse" prefHeight="34.0" prefWidth="130.0" text="Autenticarse" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <Text fill="#00a1ff" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Ya tienes una cuenta?" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </GridPane>
+                     </children>
+                     <padding>
+                        <Insets right="40.0" />
+                     </padding>
+                  </HBox>
                </children>
                <padding>
                   <Insets left="40.0" top="20.0" />
@@ -228,21 +255,17 @@
                         <Insets bottom="50.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Text fill="#00a1ff" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Te arrepientes de lo que has hecho?" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="30.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Button mnemonicParsing="false" onAction="#volver" prefHeight="34.0" prefWidth="130.0" text="Volver" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
+                  <Button fx:id="volver" mnemonicParsing="false" onAction="#volver" prefHeight="35.0" prefWidth="122.0" text="Volver">
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/iconovolver.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </VBox>

@@ -42,8 +42,7 @@ public class Usuario {
             instancia = new Usuario(null);
             String dir = File.separator+"icons"+File.separator+"default.PNG";
             imagePatternProperty.set(new ImagePattern(new Image(dir)));
-            nickNameProperty.set("Invitado");dir = File.separator+"icons"+File.separator+"default.PNG";
-            imagePatternProperty.set(new ImagePattern(new Image(dir)));
+            nickNameProperty.set("Invitado");
         }
         return instancia;
     }

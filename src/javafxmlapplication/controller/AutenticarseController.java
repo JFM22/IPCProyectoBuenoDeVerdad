@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
@@ -51,6 +52,8 @@ public class AutenticarseController implements Initializable {
     private Button volver;
     Club club ;
     boolean exist=false;
+    @FXML
+    private Label AccountFail;
  
     
     /**
@@ -105,5 +108,12 @@ public class AutenticarseController implements Initializable {
                 JavaFXMLApplication.setRoot((Parent)loader.load());
             }
         }
+    }
+
+    @FXML
+    private void CrearCuentaPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/registro.fxml"));
+        Parent root = loader.load();
+        JavaFXMLApplication.setRoot(root);
     }
 }

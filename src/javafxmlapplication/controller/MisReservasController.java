@@ -69,8 +69,6 @@ public class MisReservasController implements Initializable {
     @FXML
     private TableColumn<Booking, String> pista;
     @FXML
-    private TableColumn<Booking, String> member;
-    @FXML
     private Button pagar;
     @FXML
     private Button eliminar;
@@ -131,7 +129,7 @@ public class MisReservasController implements Initializable {
         });
         pista.setCellValueFactory(cellData -> {
             Booking item = cellData.getValue();
-            String court = item.getCourt().getName().substring(5);
+            String court = item.getCourt().getName();
             return new SimpleStringProperty(court);
         });
          Paid.setCellValueFactory(cellData -> {
