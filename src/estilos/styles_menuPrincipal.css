@@ -18,6 +18,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-image: none;
     -fx-background-color: #4CC293;
 }
+#main{
+    -fx-background-image: url("fondob.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}
 #imagen1{
     -fx-image: url('imagen.png');
 }
