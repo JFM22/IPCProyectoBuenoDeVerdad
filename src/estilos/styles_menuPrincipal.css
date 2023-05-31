@@ -14,14 +14,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-position: center center;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0.5, 0, 0); 
 }
-.button:hover{
-    -fx-background-color: #8BFCBF;
-}
 .button-hold{
     -fx-background-image: none;
     -fx-background-color: #4CC293;
 }
-
+.button:hover{
+    -fx-background-color: #8BFCBF;
+}
 #main{
     -fx-background-image: url("fondob.png");
     -fx-background-repeat: stretch;   
@@ -31,4 +30,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 #imagen1{
     -fx-image: url('imagen.png');
+}
+#button_imagen{
+    -fx-background-color: #f4f4f4ff;
+    -fx-border-radius: 5px;
 }

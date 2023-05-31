@@ -239,14 +239,14 @@
             <Insets right="40.0" />
          </VBox.margin>
          <children>
-            <Button mnemonicParsing="false" onAction="#button_actuDatos" prefHeight="34.0" prefWidth="130.0" text="Actualizar datos" GridPane.rowIndex="1">
+            <Button fx:id="boton" mnemonicParsing="false" onAction="#button_actuDatos" prefHeight="34.0" prefWidth="130.0" text="Actualizar datos" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button mnemonicParsing="false" onAction="#button_cancelar" prefHeight="34.0" prefWidth="130.0" text="Cancelar">
+                  <Button fx:id="boton" mnemonicParsing="false" onAction="#button_cancelar" prefHeight="34.0" prefWidth="130.0" text="Cancelar">
                      <font>
                         <Font size="15.0" />
                      </font>
