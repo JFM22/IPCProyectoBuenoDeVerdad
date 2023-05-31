@@ -81,6 +81,10 @@ public class MisDatosController implements Initializable {
     private ImageView mod_tarjeta;
     @FXML
     private Button boton;
+    @FXML
+    private StackPane stackpane;
+    @FXML
+    private Button cancelar;
     
     /**
      * Initializes the controller class.

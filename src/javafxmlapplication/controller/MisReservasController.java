@@ -74,8 +74,9 @@ public class MisReservasController implements Initializable {
     private ImageView imagen1;
     @FXML
     private Button pagar;
+
     @FXML
-    private Button eliminar;
+    private Button cancelar;
    
     /**
      * Initializes the controller class.
@@ -90,7 +91,7 @@ public class MisReservasController implements Initializable {
         Bindings.equal(-1,
                 tableview.getSelectionModel().selectedIndexProperty()));
         
-        eliminar.disableProperty().bind(
+        cancelar.disableProperty().bind(
         Bindings.equal(-1,
                 tableview.getSelectionModel().selectedIndexProperty()));
         
