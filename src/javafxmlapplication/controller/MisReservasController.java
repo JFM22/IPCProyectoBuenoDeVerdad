@@ -183,6 +183,7 @@ public class MisReservasController implements Initializable {
     @FXML
     private void pagarReserva(ActionEvent event) throws IOException {
        //if(miembro.checkHasCreditInfo()==false){
+       if(!tableview.getFocusModel().getFocusedItem().getPaid()){
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Hacer el pago de la pista");
             alert.setHeaderText("Tienes el pago de la reserva pendiente");
@@ -193,6 +194,7 @@ public class MisReservasController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()){
                 if(result.get() == buttonTypeOne){
+                       
                         if(!miembro.checkHasCreditInfo()){
                         FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/javafxmlapplication/view/tarjetaCredito.fxml"));
                         Stage stage = new Stage();
@@ -223,7 +225,13 @@ public class MisReservasController implements Initializable {
                 if(result.get() == buttonTypeTwo){
                     System.out.println("Pagar más tarde");
                 }
-            } 
+            } }else{
+           Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error confirmacion de pago");
+            alert.setHeaderText(null);
+            alert.setContentText("la reserva ya esta pagada");
+            alert.showAndWait();
+       }
        }
     
 
