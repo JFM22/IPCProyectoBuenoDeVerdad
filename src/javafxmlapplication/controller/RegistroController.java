@@ -131,7 +131,7 @@ public class RegistroController implements Initializable {
         });
         field_password.focusedProperty().addListener((observable, oldValue, newValue)->{
             if (!newValue){
-                if(field_password.getText().length()<7){
+                if(field_password.getText().length()<7 && field_password.getText().length()!=0){
                     launch_error_inm("La contraseña debe contener más de 6 carácteres");
                     field_password.requestFocus();
                 };
