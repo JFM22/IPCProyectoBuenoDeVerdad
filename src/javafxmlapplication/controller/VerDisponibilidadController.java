@@ -12,8 +12,6 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,8 +47,6 @@ public class VerDisponibilidadController implements Initializable {
     @FXML
     private TextField buscadorNickname;
     @FXML
-    private Button aplicarFiltros;
-    @FXML
     private TableView<reserva> tableview;
     @FXML
     private TableColumn<reserva, String> pista;
@@ -72,8 +68,6 @@ public class VerDisponibilidadController implements Initializable {
     Club club;
     @FXML
     private ComboBox<String> combo;
-    @FXML
-    private ImageView imagen1;
     /**
      * Initializes the controller class.
      */
@@ -101,40 +95,8 @@ public class VerDisponibilidadController implements Initializable {
                 buscadorNickname.setText(oldV);
             }
         });
-        //Club club= Club.getInstance(); 
-        //==================================
-        //Clean the file club.db
-        //club.setInitialData();
-        
-        //===================================
-        // club data:
-//        System.out.println("Club name: "+ club.getName());
-//        for (Court court : club.getCourts()) {
-//            System.out.println("court:" + court.getName());
-//        }
-        //===================================
-        // add simple data:
-        //club.addSimpleData();
-        
-        //===================================
-        // users        
-//        for (Member member : club.getMembers()) {
-//            System.out.println("member:" + member.getName()+ ", "+ member.getNickName());
-//        }
-        
-        //===================================
-        // bookings now + 2 days
-//        System.out.println("Bookings after 2 days");
-//        List<Booking> forDayBookings = club.getForDayBookings(LocalDate.now().plusDays(0));
-//        for (Booking booking : forDayBookings) {
-//              System.out.println("booking:" + booking.getMember().getNickName()+
-//                      ", " + booking.getCourt().getName()+ ", "+
-//                      booking.getMadeForDay().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) +
-//                      ", "+booking.getFromTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
-//        }  
-//        
         timeSlots = new ArrayList<>();
-        //club.addSimpleData();
+
         //----------------------------------------------------------------------------------
         // desde la hora de inicio y hasta la hora de fin creamos slotTime segun la duracion
         LocalDate date = LocalDate.now();

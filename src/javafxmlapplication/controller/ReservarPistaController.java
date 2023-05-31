@@ -12,10 +12,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -36,7 +33,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import model.Booking;
@@ -58,22 +54,12 @@ import utils.Usuario;
     private ComboBox<String> Combo;
     @FXML
     private Button ReservarButton;
-    @FXML
-    private Label slotSelected;
    
     private Club club;
-    String[] Horas = {"09:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00"
-    ,"16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00","20:00-21:00","21:00-22:00"};
-    String horario;
-    Booking reserva;
     Member member;
     Usuario user;
     Court pistaSeleccionada=new Court();
-    LocalDateTime fechaHoy;
     LocalTime horaInicio;
-    boolean paid=false;
-    TimeSlot aux;
-    private ObservableList<String> datosLista=null;
     private final LocalTime firstSlotStart = LocalTime.of(9, 0);
     private final Duration slotLength = Duration.ofMinutes(60);
     private final LocalTime lastSlotStart = LocalTime.of(21, 0);
@@ -88,11 +74,7 @@ import utils.Usuario;
         private ObservableList<reserva> Reservas = FXCollections.observableList(new ArrayList<reserva>());
     @FXML
     private TableColumn<reserva, String> NickName;
-    @FXML
-    private ImageView imagen1;
     
-
-
     /**
      * Initializes the controller class.
      */
@@ -114,10 +96,6 @@ import utils.Usuario;
         ReservarButton.disableProperty().bind(
         Bindings.equal(-1,
                 tableview.getSelectionModel().selectedIndexProperty()));
-        //Member u = club.getMemberByCredentials("vege", "7777777");
-        //user.setUsuario(u);
-       //member = user.getUsuario();
-        // TODO
          for(Court c : club.getCourts()){pistas.add(c.getName());}
         Combo.getItems().addAll(pistas);
         Combo.setValue(pistas.get(0));
@@ -140,19 +118,11 @@ import utils.Usuario;
        
         
         dpBooking.setValue(LocalDate.now());
-        //ListView.getItems().addAll(Horas);
-         
-         //dpBooking.setOnAction(event -> updateListView());
          dpBooking.valueProperty().addListener((a, b, c)->{
              updateTableView();
               
          });
-         //Combo.valueProperty().addListener((a, b, c)->{
-            
-
-        // });
           timeSlots = new ArrayList<>();
-        //club.addSimpleData();
         //----------------------------------------------------------------------------------
         // desde la hora de inicio y hasta la hora de fin creamos slotTime segun la duracion
         LocalDate date = dpBooking.getValue();
@@ -210,13 +180,11 @@ import utils.Usuario;
         
         reserva reservaSeleccionada =tableview.getSelectionModel().getSelectedItem();
         int indiceReserva =tableview.getSelectionModel().getSelectedIndex();
-        //tableview.getItems().get(indiceReserva);
           
            
            
 
         Booking bookSeleccionada= reservaSeleccionada.getBooking();
-        //Booking bookSeleccionada= reservaSeleccionada.getBooking();//esto me indica si está disponible
         String miNombre=member.getNickName();
         int caso=0;//caso=1 no puedes reservar mas de dos horas seguidas
                     
@@ -310,7 +278,6 @@ import utils.Usuario;
                     if(member.checkHasCreditInfo()==true){
                     //-------------------------------------------------------------------------------------
                 LocalDate fechaSeleccionada =dpBooking.getValue();
-                paid=true;
                 horaInicio=LocalTime.parse(reservaSeleccionada.getHora().substring(0,5));
                 
                 //pistaSeleccionada.setName(Combo.getValue());
@@ -330,13 +297,9 @@ import utils.Usuario;
                 
                 }}else{
                    LocalDate fechaSeleccionada =dpBooking.getValue();
-                paid=false;
                 horaInicio=LocalTime.parse(reservaSeleccionada.getHora().substring(0,5));
                 
-                //pistaSeleccionada.setName(Combo.getValue());
                 try{
-                 
-                    
                 club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,member.checkHasCreditInfo(),club.getCourt(Combo.getValue()),member); 
                 updateTableView();
                 Alert alert4 = new Alert(Alert.AlertType.WARNING);
