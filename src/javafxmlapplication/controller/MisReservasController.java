@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -160,7 +159,6 @@ public class MisReservasController implements Initializable {
     
     @FXML
     private void pagarReserva(ActionEvent event) throws IOException {
-       //if(miembro.checkHasCreditInfo()==false){
        if(!tableview.getFocusModel().getFocusedItem().getPaid()){
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Hacer el pago de la pista");
@@ -178,9 +176,6 @@ public class MisReservasController implements Initializable {
                         Stage stage = new Stage();
                         
                         Parent root = miCargador.load();
-                        //VistaPersonaController controlPersona = miCargador.getController();
-                        //Persona persona = personasListView.getSelectionModel().getSelectedItem();
-                        //controlPersona.initPersona(persona);
                         Scene scene = new Scene(root, 500, 300);
                         stage.setScene(scene);
                         TarjetaCreditoController t = miCargador.getController();
@@ -194,11 +189,6 @@ public class MisReservasController implements Initializable {
                     } else {tableview.getFocusModel().getFocusedItem().setPaid(true);}
                 listBooking = club.getUserBookings(miembro.getNickName());
                 ActualizarTabla(listBooking);
-                   // Alert alert3 = new Alert(AlertType.INFORMATION);
-                   // alert3.setTitle("Pago de la reserva");
-                   // alert3.setHeaderText(null);
-                   // alert3.setContentText("El pago de la reserva ha sido realizado correctamente");
-                   // alert3.showAndWait();
                 }
                 if(result.get() == buttonTypeTwo){
                     System.out.println("Pagar más tarde");
@@ -218,7 +208,6 @@ public class MisReservasController implements Initializable {
             Booking selectedItem = tableview.getSelectionModel().getSelectedItem();
             diaReservado = selectedItem.getMadeForDay();
             diaReserva2 = LocalDate.now();
-            //int DifH = diaReservado.compareTo(HoraReserva);
             long diferenciasEnDias = Math.abs(ChronoUnit.DAYS.between(diaReservado,diaReserva2));
             System.out.println(diaReservado.toString());
             System.out.println(diaReserva2.toString());
