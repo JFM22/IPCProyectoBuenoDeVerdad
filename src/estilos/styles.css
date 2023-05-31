@@ -10,7 +10,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-color: #96e9e9;
     -fx-background-radius: 1;
     -fx-border-color: black;
-    -fx-border-width: 0.2px;
+    -fx-border-width: 0.1px;
 }
 .button:hover{
     -fx-background-color: #28bdbd;
