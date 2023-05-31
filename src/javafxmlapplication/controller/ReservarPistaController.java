@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -110,7 +111,9 @@ import utils.Usuario;
             Logger.getLogger(ReservarPistaController.class.getName()).log(Level.SEVERE, null, ex);
         }
         member=Usuario.getInstancia().getUsuario();
-        
+        ReservarButton.disableProperty().bind(
+        Bindings.equal(-1,
+                tableview.getSelectionModel().selectedIndexProperty()));
         //Member u = club.getMemberByCredentials("vege", "7777777");
         //user.setUsuario(u);
        //member = user.getUsuario();
@@ -207,8 +210,11 @@ import utils.Usuario;
         
         reserva reservaSeleccionada =tableview.getSelectionModel().getSelectedItem();
         int indiceReserva =tableview.getSelectionModel().getSelectedIndex();
-        
         //tableview.getItems().get(indiceReserva);
+          
+           
+           
+
         Booking bookSeleccionada= reservaSeleccionada.getBooking();
         //Booking bookSeleccionada= reservaSeleccionada.getBooking();//esto me indica si está disponible
         String miNombre=member.getNickName();
@@ -358,6 +364,7 @@ import utils.Usuario;
             }
             
         }
+           
         
 }
 
