@@ -16,34 +16,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 import model.Booking;
-import model.Court;
 import model.Member;
 import utils.Usuario;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -68,17 +60,8 @@ public class MisReservasController implements Initializable {
     private TableColumn<Booking, String> Paid;
     @FXML
     private TableColumn<Booking, String> pista;
-    @FXML
-    private Button pagar;
-    @FXML
-    private Button eliminar;
-
-    private boolean estaPagada = false;
-    
-    private LocalDateTime diaReserva;
     
     private LocalDate diaReservado;
-    
     private LocalDate diaReserva2;
 
     Member miembro;
@@ -88,9 +71,13 @@ public class MisReservasController implements Initializable {
     
     private ObservableList<Booking> Bookings = FXCollections.observableList(new ArrayList<Booking>());
     private List<Booking> listBooking = new ArrayList<>(); 
-    
     @FXML
     private ImageView imagen1;
+    @FXML
+    private Button pagar;
+    @FXML
+    private Button eliminar;
+   
     /**
      * Initializes the controller class.
      */
@@ -100,7 +87,13 @@ public class MisReservasController implements Initializable {
         
         tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         miembro = Usuario.getInstancia().getUsuario();
+        pagar.disableProperty().bind(
+        Bindings.equal(-1,
+                tableview.getSelectionModel().selectedIndexProperty()));
         
+        eliminar.disableProperty().bind(
+        Bindings.equal(-1,
+                tableview.getSelectionModel().selectedIndexProperty()));
         
         try {
             club = Club.getInstance();
@@ -141,32 +134,25 @@ public class MisReservasController implements Initializable {
             return new SimpleStringProperty(res);
         });
         
-
-
-//        hora.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getFromTime().toString()));
-//        ReservedDay.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getMadeForDay().toString()));
-//        member.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getMember().toString()));
-//        pista.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getCourt().toString()));
-//        Paid.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getPaid().toString()));
-//        ReservedDay.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getMadeForDay().toString()));
-//       
     }    
     
     public void ActualizarTabla(List<Booking> LB){
         Bookings.clear();
         diaReserva2 = LocalDate.now();
-        int i = LB.size();
-        if (i>10){
-            i = i-10;
-        }else{
-            i=0;
-        }
-        while(i<LB.size()){
+        int i = 0;
+        int contador = 0;
+        //Que salgan las 10 reservas más cercanas a terminar
+        while(contador<10 && i<LB.size()){
             Booking b = LB.get(i++);
-            if(!(b.getMadeForDay().compareTo(LocalDate.now())<0)){
+            int dato = b.getMadeForDay().compareTo(LocalDate.now());
+            if(dato>0){ // SI es para un día mayor al actual
                 Bookings.add(b);
+                contador++;
+            //Si es para hoy, la hora tiene que ser mayor o igual a la actual
+            }else if(dato==0 && b.getFromTime().compareTo(LocalTime.now().minusHours(1))>=0){
+                Bookings.add(b);
+                contador++;
             }
-            //if(b.getMadeForDay().compareTo(diaReserva2)>=0){Bookings.add(b);}
         }
         
         tableview.setItems(Bookings);
@@ -230,7 +216,6 @@ public class MisReservasController implements Initializable {
     @FXML
     private void cancelarReserva(ActionEvent event) throws ClubDAOException {
             Booking selectedItem = tableview.getSelectionModel().getSelectedItem();
-            diaReserva = selectedItem.getBookingDate();
             diaReservado = selectedItem.getMadeForDay();
             diaReserva2 = LocalDate.now();
             //int DifH = diaReservado.compareTo(HoraReserva);

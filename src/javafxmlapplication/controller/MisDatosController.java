@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 
-///jshflsahdlkjdaslkfjlkasfjdlkjasdkfjlkasfjlkd
 package javafxmlapplication.controller;
 
 import java.io.File;
@@ -19,9 +18,7 @@ import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -35,7 +32,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafxmlapplication.JavaFXMLApplication;
 import model.Club;
 import model.ClubDAOException;
 import model.Member;
@@ -64,8 +60,6 @@ public class MisDatosController implements Initializable {
     private TextField field_cvv;
     @FXML
     private Button button_imagen;
-    @FXML
-    private StackPane stackpane;
     @FXML
     private Circle circulo;
     @FXML
@@ -277,7 +271,6 @@ public class MisDatosController implements Initializable {
     @FXML
     private void button_cancelar(ActionEvent event) {
         inicializar();
-        //FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/MenuPrincipal.fxml"));
     }
     
 }

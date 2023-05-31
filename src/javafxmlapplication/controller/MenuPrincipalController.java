@@ -15,11 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -88,8 +86,6 @@ public class MenuPrincipalController implements Initializable {
         nickNameLabel.textProperty().bind(u.getNickProperty());
         userImage.fillProperty().bind(u.getImagePatternProperty());
         
-        //Quería hacer esto con bindings pero el nickname e Imagen de Member no tienen .property
-        //prepararUser();
         prepararColores();
         miPerfil_button.disableProperty().bind(u.getIsNotLoggedProperty());
         misReservas_button.disableProperty().bind(u.getIsNotLoggedProperty());
@@ -109,8 +105,6 @@ public class MenuPrincipalController implements Initializable {
         if(anterior.equals(hbox)) return;
         hbox.setBackground(background_transparente);
         b.getStyleClass().add("button-hold");
-        //anterior_b.getStyleClass().remove("button-hold");
-        //anterior_b.getStyleClass().add("button-not-hold");
         if(anterior != null) anterior.setBackground(background);
         if(anterior_b != null) anterior_b.getStyleClass().remove("button-hold");
         
