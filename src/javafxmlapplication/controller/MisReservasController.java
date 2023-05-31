@@ -179,7 +179,7 @@ public class MisReservasController implements Initializable {
     
     @FXML
     private void pagarReserva(ActionEvent event) throws IOException {
-       //if(miembro.checkHasCreditInfo()==false){
+       if(miembro.checkHasCreditInfo()==false){
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Hacer el pago de la pista");
             alert.setHeaderText("Tienes el pago de la reserva pendiente");
@@ -204,21 +204,26 @@ public class MisReservasController implements Initializable {
                         stage.setTitle("Introducir Tarjeta");
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.showAndWait();
-                    } else {tableview.getFocusModel().getFocusedItem().setPaid(true);}
+                       
+                        
+                    } else {
+                tableview.getFocusModel().getFocusedItem().setPaid(true);}
                 listBooking = club.getUserBookings(miembro.getNickName());
                 ActualizarTabla(listBooking);
-                   // Alert alert3 = new Alert(AlertType.INFORMATION);
-                   // alert3.setTitle("Pago de la reserva");
-                   // alert3.setHeaderText(null);
-                   // alert3.setContentText("El pago de la reserva ha sido realizado correctamente");
-                   // alert3.showAndWait();
                 }
                 if(result.get() == buttonTypeTwo){
                     System.out.println("Pagar más tarde");
                 }
             } 
+       } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Confirmacion de pago");
+            alert.setHeaderText(null);
+            alert.setContentText("Pago realizado");
+            alert.showAndWait();
+            tableview.getFocusModel().getFocusedItem().setPaid(true);
        }
-    
+    }
 
     @FXML
     private void cancelarReserva(ActionEvent event) throws ClubDAOException {
@@ -254,7 +259,7 @@ public class MisReservasController implements Initializable {
                     Alert alert4 = new Alert(AlertType.WARNING);
                     alert4.setTitle("Advertencia");
                     alert4.setHeaderText(null);
-                    alert4.setContentText("No se puede cancelar la reserva ya que quedan menos de 24 horas para su uso");
+                    alert4.setContentText("No se puede cancelar la reserva ya que quedan menos de 24 horas para su uso o porque es una reserva anterior al dia de hoy");
                     alert4.showAndWait();
                   }
                 }
