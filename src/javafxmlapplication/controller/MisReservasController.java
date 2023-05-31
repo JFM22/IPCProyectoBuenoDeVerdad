@@ -92,8 +92,6 @@ public class MisReservasController implements Initializable {
     private List<Booking> listBooking = new ArrayList<>(); 
     
     @FXML
-    private Label Label;
-    @FXML
     private ImageView imagen1;
     /**
      * Initializes the controller class.
@@ -104,7 +102,7 @@ public class MisReservasController implements Initializable {
         
         tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         miembro = Usuario.getInstancia().getUsuario();
-        Label.visibleProperty().bind(Bindings.not(new SimpleBooleanProperty(miembro.checkHasCreditInfo())));
+        
         
         try {
             club = Club.getInstance();

@@ -194,7 +194,5 @@ public class MenuPrincipalController implements Initializable {
         JavaFXMLApplication.setRoot("inicioapp");
     }
 
-    @FXML
-    private void verDisponibilidadAction(MouseEvent event) {
-    }
+ 
 }
