@@ -342,15 +342,14 @@ import utils.Usuario;
 
                 }catch(ClubDAOException e){}}} 
         }   else{
-            if(bookSeleccionada!=null||caso!=1 && !miNombre.equals(reservaSeleccionada.getMiembro())){
+            if(bookSeleccionada!=null){
                 Alert alert4 = new Alert(Alert.AlertType.WARNING);
                     alert4.setTitle("Advertencia");
                     alert4.setHeaderText(null);
                     alert4.setContentText("La pista ya está ocupada");
                     alert4.showAndWait();
                   
-            }
-            if(!esPosible&& caso==1){
+            }else if(!esPosible&& caso==1){
             Alert alert4 = new Alert(Alert.AlertType.WARNING);
                     alert4.setTitle("Advertencia");
                     alert4.setHeaderText(null);
