@@ -144,6 +144,14 @@ public class MenuPrincipalController implements Initializable {
         borderpane.setCenter(root);
         
     }
+    @FXML
+    private void verDisponibilidadAction(ActionEvent event) throws IOException {
+        change_color(hBox_DisponibilidadPistas,disp_Button);
+        
+        FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/VerDisponibilidad.fxml"));
+        Node root = loader.load();
+        borderpane.setCenter(root);
+    }
     
     private void prepararColores(){
         BackgroundFill backgroundFill = new BackgroundFill(Color.web("#0b2e8e"), null, null);
@@ -184,15 +192,6 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private void volver(ActionEvent event) {
         JavaFXMLApplication.setRoot("inicioapp");
-    }
-
-    @FXML
-    private void verDisponibilidadAction(ActionEvent event) throws IOException {
-        change_color(hBox_DisponibilidadPistas,disp_Button);
-        
-        FXMLLoader loader= new  FXMLLoader(getClass().getResource("/javafxmlapplication/view/VerDisponibilidad.fxml"));
-        Node root = loader.load();
-        borderpane.setCenter(root);
     }
 
     @FXML

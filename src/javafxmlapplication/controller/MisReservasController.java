@@ -44,6 +44,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Club;
@@ -92,6 +93,8 @@ public class MisReservasController implements Initializable {
     
     @FXML
     private Label Label;
+    @FXML
+    private ImageView imagen1;
     /**
      * Initializes the controller class.
      */
@@ -193,6 +196,7 @@ public class MisReservasController implements Initializable {
                         if(!miembro.checkHasCreditInfo()){
                         FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/javafxmlapplication/view/tarjetaCredito.fxml"));
                         Stage stage = new Stage();
+                        
                         Parent root = miCargador.load();
                         //VistaPersonaController controlPersona = miCargador.getController();
                         //Persona persona = personasListView.getSelectionModel().getSelectedItem();
@@ -203,6 +207,9 @@ public class MisReservasController implements Initializable {
                         t.booking(tableview.getFocusModel().getFocusedItem());
                         stage.setTitle("Introducir Tarjeta");
                         stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setResizable(false);
+                        stage.setHeight(262);
+                        stage.setWidth(480);
                         stage.showAndWait();
                     } else {tableview.getFocusModel().getFocusedItem().setPaid(true);}
                 listBooking = club.getUserBookings(miembro.getNickName());
