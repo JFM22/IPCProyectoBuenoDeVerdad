@@ -160,11 +160,20 @@ public class MisReservasController implements Initializable {
     public void ActualizarTabla(List<Booking> LB){
         Bookings.clear();
         diaReserva2 = LocalDate.now();
-        while(Bookings.size()<10){
-            for(Booking b: LB){
-                if(b.getMadeForDay().compareTo(diaReserva2)>=0){Bookings.add(b);}
-            }
+        int i = LB.size();
+        if (i>10){
+            i = i-10;
+        }else{
+            i=0;
         }
+        while(i<LB.size()){
+            Booking b = LB.get(i++);
+            if(!(b.getMadeForDay().compareTo(LocalDate.now())<0)){
+                Bookings.add(b);
+            }
+            //if(b.getMadeForDay().compareTo(diaReserva2)>=0){Bookings.add(b);}
+        }
+        
         tableview.setItems(Bookings);
     }
     
@@ -235,6 +244,7 @@ public class MisReservasController implements Initializable {
                   if(diferenciasEnDias > dato) {  
                     tableview.getItems().remove(selectedItem);
                     club.removeBooking(selectedItem);
+                    ActualizarTabla(club.getUserBookings(miembro.getNickName()));
                     Alert alert2 = new Alert(AlertType.INFORMATION);
                     alert2.setTitle("Cancelar Reserva");
                     alert2.setHeaderText(null);
