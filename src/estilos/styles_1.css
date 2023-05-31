@@ -14,7 +14,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-effect: dropshadow(three-pass-box, black, 3, 0.5, 0, 0); 
 }
 #main{
-    -fx-background-image: url("fondob.png");
+    -fx-background-image: url("fondo.png");
     -fx-background-repeat: stretch;   
     -fx-background-size: cover;
     -fx-background-position: center center;

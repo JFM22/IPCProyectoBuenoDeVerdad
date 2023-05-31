@@ -46,7 +46,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafxmlapplication.view.TarjetaCreditoController;
 import model.Club;
 import model.ClubDAOException;
 /**
