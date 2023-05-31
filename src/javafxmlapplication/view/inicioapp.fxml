@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="main" fx:id="main" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.InicioappController">
+<VBox fx:id="main" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.InicioappController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
          <children>
@@ -29,7 +29,7 @@
                   <Insets />
                </VBox.margin>
             </Text>
-            <Text stroke="#00eaff" strokeType="OUTSIDE" text="La manera más fácil de reservar una pista de tenis">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="La manera más fácil de reservar una pista de tenis" textAlignment="CENTER">
                <VBox.margin>
                   <Insets bottom="50.0" />
                </VBox.margin>
