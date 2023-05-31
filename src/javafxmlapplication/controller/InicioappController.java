@@ -45,6 +45,7 @@ public class InicioappController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         //rect.setFill(new javafx.scene.paint.LinearGradient(0, 0, 1, 1, true, javafx.scene.paint.CycleMethod.NO_CYCLE,
         //        new javafx.scene.paint.Stop(0, Color.web("#4f46e4")),
         //        new javafx.scene.paint.Stop(1, Color.TRANSPARENT)));

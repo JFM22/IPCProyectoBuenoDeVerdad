@@ -59,7 +59,7 @@ public class JavaFXMLApplication extends Application {
         //     - se muestra el stage de manera no modal mediante el metodo show()
         scene.getStylesheets().add(getClass().getResource("/estilos/styles_1.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("start PROJECT - IPC:");
+        stage.setTitle("Club de tenis-GreenBall");
         Usuario.getInstancia();
         stage.show();
     }
