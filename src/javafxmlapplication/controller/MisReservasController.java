@@ -142,11 +142,7 @@ public class MisReservasController implements Initializable {
             else{res = "no pagado";}
             return new SimpleStringProperty(res);
         });
-          member.setCellValueFactory(cellData -> {
-            Booking item = cellData.getValue();
-            String mem1 = item.getMember().getNickName();
-            return new SimpleStringProperty(mem1);
-        });
+        
 
 
 //        hora.setCellValueFactory(Booking->new SimpleStringProperty(Booking.getValue().getFromTime().toString()));
