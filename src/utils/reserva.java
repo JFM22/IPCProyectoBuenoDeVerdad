@@ -27,7 +27,7 @@ public class reserva {
          
     public reserva(String p, LocalTime h, String m, String d, Booking b) {
         setPista(p);
-        setHora(h.toString());
+        setHora(h.toString()+"-"+h.plusHours(1).toString());
         setMiembro(m);
         setDisponibilidad(d);
         setBooking(b);

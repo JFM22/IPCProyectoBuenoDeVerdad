@@ -305,13 +305,13 @@ import utils.Usuario;
                     //-------------------------------------------------------------------------------------
                 LocalDate fechaSeleccionada =dpBooking.getValue();
                 paid=true;
-                horaInicio=LocalTime.parse(reservaSeleccionada.getHora());
+                horaInicio=LocalTime.parse(reservaSeleccionada.getHora().substring(0,5));
                 
                 //pistaSeleccionada.setName(Combo.getValue());
                 try{
                  
                     
-                club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,paid,club.getCourt(Combo.getValue()),member); 
+                club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,member.checkHasCreditInfo(),club.getCourt(Combo.getValue()),member); 
                 updateTableView();
                 Alert alert4 = new Alert(Alert.AlertType.WARNING);
                     alert4.setTitle("Información");
@@ -325,13 +325,13 @@ import utils.Usuario;
                 }}else{
                    LocalDate fechaSeleccionada =dpBooking.getValue();
                 paid=false;
-                horaInicio=LocalTime.parse(reservaSeleccionada.getHora());
+                horaInicio=LocalTime.parse(reservaSeleccionada.getHora().substring(0,5));
                 
                 //pistaSeleccionada.setName(Combo.getValue());
                 try{
                  
                     
-                club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,paid,club.getCourt(Combo.getValue()),member); 
+                club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,member.checkHasCreditInfo(),club.getCourt(Combo.getValue()),member); 
                 updateTableView();
                 Alert alert4 = new Alert(Alert.AlertType.WARNING);
                     alert4.setTitle("Información");
