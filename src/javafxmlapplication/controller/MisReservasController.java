@@ -128,7 +128,7 @@ public class MisReservasController implements Initializable {
         });
         hora.setCellValueFactory(cellData -> {
             Booking item = cellData.getValue();
-            String hora = item.getFromTime().toString();
+            String hora = item.getFromTime().toString()+"-"+item.getFromTime().plusHours(1).toString();
             return new SimpleStringProperty(hora);
         });
         pista.setCellValueFactory(cellData -> {

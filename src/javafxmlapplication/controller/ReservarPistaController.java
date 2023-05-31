@@ -313,7 +313,7 @@ import utils.Usuario;
                     
                 club.registerBooking(LocalDateTime.now(),fechaSeleccionada,horaInicio,member.checkHasCreditInfo(),club.getCourt(Combo.getValue()),member); 
                 updateTableView();
-                Alert alert4 = new Alert(Alert.AlertType.WARNING);
+                Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
                     alert4.setTitle("Información");
                     alert4.setHeaderText(null);
                     alert4.setContentText("Pista reservada y pagada");
