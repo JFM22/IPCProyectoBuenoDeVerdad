@@ -99,6 +99,7 @@ public class MisReservasController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        
         tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         miembro = Usuario.getInstancia().getUsuario();
         Label.visibleProperty().bind(Bindings.not(new SimpleBooleanProperty(miembro.checkHasCreditInfo())));
@@ -159,10 +160,12 @@ public class MisReservasController implements Initializable {
     
     public void ActualizarTabla(List<Booking> LB){
         Bookings.clear();
-        for(Booking b: LB){
-        Bookings.add(b);
+        diaReserva2 = LocalDate.now();
+        while(Bookings.size()<10){
+            for(Booking b: LB){
+                if(b.getMadeForDay().compareTo(diaReserva2)>=0){Bookings.add(b);}
+            }
         }
-        System.out.println(Bookings.size());
         tableview.setItems(Bookings);
     }
     
