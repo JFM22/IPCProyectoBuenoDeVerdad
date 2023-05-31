@@ -22,3 +22,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 #button_imagen:hover{
     -fx-background-color: #d9d9d9;
 }
+#cancelar{
+    -fx-background-color: #CD5C5C;
+}
+#cancelar:hover{
+    -fx-background-color: #7D3838;
+}

@@ -44,6 +44,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Club;
@@ -92,6 +93,8 @@ public class MisReservasController implements Initializable {
     
     @FXML
     private Label Label;
+    @FXML
+    private ImageView imagen1;
     /**
      * Initializes the controller class.
      */
@@ -180,6 +183,7 @@ public class MisReservasController implements Initializable {
     @FXML
     private void pagarReserva(ActionEvent event) throws IOException {
        //if(miembro.checkHasCreditInfo()==false){
+       if(!tableview.getFocusModel().getFocusedItem().getPaid()){
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Hacer el pago de la pista");
             alert.setHeaderText("Tienes el pago de la reserva pendiente");
@@ -190,9 +194,11 @@ public class MisReservasController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()){
                 if(result.get() == buttonTypeOne){
+                       
                         if(!miembro.checkHasCreditInfo()){
                         FXMLLoader miCargador = new FXMLLoader(getClass().getResource("/javafxmlapplication/view/tarjetaCredito.fxml"));
                         Stage stage = new Stage();
+                        
                         Parent root = miCargador.load();
                         //VistaPersonaController controlPersona = miCargador.getController();
                         //Persona persona = personasListView.getSelectionModel().getSelectedItem();
@@ -203,6 +209,9 @@ public class MisReservasController implements Initializable {
                         t.booking(tableview.getFocusModel().getFocusedItem());
                         stage.setTitle("Introducir Tarjeta");
                         stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setResizable(false);
+                        stage.setHeight(262);
+                        stage.setWidth(480);
                         stage.showAndWait();
                     } else {tableview.getFocusModel().getFocusedItem().setPaid(true);}
                 listBooking = club.getUserBookings(miembro.getNickName());
@@ -216,7 +225,13 @@ public class MisReservasController implements Initializable {
                 if(result.get() == buttonTypeTwo){
                     System.out.println("Pagar más tarde");
                 }
-            } 
+            } }else{
+           Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error confirmacion de pago");
+            alert.setHeaderText(null);
+            alert.setContentText("la reserva ya esta pagada");
+            alert.showAndWait();
+       }
        }
     
 
